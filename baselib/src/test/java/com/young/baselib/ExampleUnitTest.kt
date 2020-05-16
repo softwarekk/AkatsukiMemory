@@ -1,4 +1,4 @@
-package com.young.akatsuki
+package com.young.baselib
 
 import org.junit.Test
 
