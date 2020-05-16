@@ -1,0 +1,2 @@
+# AkatsukiMemory
+for naruto fans
