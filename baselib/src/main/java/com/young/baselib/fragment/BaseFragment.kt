@@ -13,7 +13,7 @@ import com.young.baselib.viewmodel.BaseViewModel
 /**
  * fragment 最基件
  */
-abstract class BaseFragment<V : ViewDataBinding?, VM : BaseViewModel?> :
+abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel?> :
     Fragment() {
     private var viewModel: VM? = null
     private var viewDataBinding: V? = null

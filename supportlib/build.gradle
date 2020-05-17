@@ -1,9 +1,10 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion rootProject.buildToolsVersion
-
 
     defaultConfig {
         minSdkVersion rootProject.minSdkVersion
@@ -12,17 +13,19 @@ android {
         versionName "1.0"
         consumerProguardFiles 'consumer-rules.pro'
     }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
 }
 
 dependencies {
-    implementation project(':baselib')
-    api "androidx.recyclerview:recyclerview:$rootProject.recyclerview_version"
+    implementation project(':commonlib')
 }

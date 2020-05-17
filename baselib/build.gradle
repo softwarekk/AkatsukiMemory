@@ -1,4 +1,5 @@
-apply plugin: 'com.android.library'
+ext.alwaysLib=true
+apply from: rootProject.file('cc-settings-2.gradle')
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
@@ -33,7 +34,7 @@ android {
 }
 
 dependencies {
-    //基于arc构建的项目  如果组件存在不依赖arc 可以把库上调重构建一层base
+    //基于arc构建的项目  如果组件存在不依赖arc根据自己的组件业务上调或下沉 总之根据业务做依赖位移
     api "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
     api "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     api "androidx.constraintlayout:constraintlayout:$constraint_version"

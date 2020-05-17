@@ -1,4 +1,6 @@
 rootProject.name='AkatsukiMemory'
 include ':app'
 include ':baselib'
-include ':commomlib'
+include ':commonlib'
+include ':supportlib'
+include ':businessmine'

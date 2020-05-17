@@ -4,12 +4,16 @@ import android.app.ActivityManager
 import android.app.Application
 import android.content.Context
 import android.os.Process
+import com.billy.cc.core.component.CC
 
 /**
  */
-class BaseApplication : Application() {
+open class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
+        CC.enableDebug(BuildConfig.DEBUG)
+        CC.enableVerboseLog(BuildConfig.DEBUG)
+        CC.enableRemoteCC(BuildConfig.DEBUG)
         sApplication = this
     }
 

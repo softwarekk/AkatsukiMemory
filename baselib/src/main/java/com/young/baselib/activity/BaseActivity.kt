@@ -10,7 +10,7 @@ import com.young.baselib.viewmodel.BaseViewModel
 /**
  * BaseActivity 最基件
  */
-abstract class BaseActivity<V : ViewDataBinding?, VM : BaseViewModel?> :
+abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> :
     AppCompatActivity() {
     private var viewModel: VM? = null
     private var viewDataBinding: V? = null
