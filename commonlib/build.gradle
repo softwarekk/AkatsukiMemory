@@ -1,4 +1,7 @@
-apply plugin: 'com.android.library'
+ext.alwaysLib=true
+apply from: rootProject.file('cc-settings-2.gradle')
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
@@ -30,12 +33,13 @@ android {
 
 dependencies {
     api "androidx.recyclerview:recyclerview:$rootProject.recyclerview_version"
-    implementation "com.squareup.okhttp3:logging-interceptor:3.9.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.2.0"
     api 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.8.1'
     implementation 'com.squareup.retrofit2:adapter-rxjava:2.8.1'
     implementation 'com.squareup.retrofit2:retrofit:2.8.1'
-    implementation 'com.squareup.okhttp3:okhttp:3.9.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.5.0'
     implementation 'com.google.code.gson:gson:2.8.6'
     api 'io.reactivex.rxjava2:rxandroid:2.0.2'
     api 'io.reactivex:rxandroid:1.2.1'

@@ -5,15 +5,23 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModelProvider
+import com.young.baselib.BaseApplication
 import com.young.baselib.viewmodel.BaseViewModel
 
 /**
- * BaseActivity 最基件
+
+- BaseActivity 最基件
  */
 abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> :
-    AppCompatActivity() {
+    AppCompatActivity {
+
+
     private var viewModel: VM? = null
     private var viewDataBinding: V? = null
+
+    constructor() : super() {
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         byDataBindingAttach()
@@ -22,10 +30,8 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> :
     override fun onDestroy() {
         super.onDestroy()
     }
-
     protected abstract fun getViewModel(): VM
     abstract val bindingVariable: Int
-
     @get:LayoutRes
     abstract val layoutId: Int
     private fun byDataBindingAttach() {
@@ -36,5 +42,13 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> :
         } else {
         }
         viewDataBinding?.setLifecycleOwner(this)
+    }
+    // 2020 用法 ViewModelProvider
+    protected  fun getAppViewModelProvider(): ViewModelProvider? {
+        return (applicationContext as BaseApplication).getAppViewModelProvider(this)
+    }
+
+    protected  fun getActivityViewModelProvider(activity: AppCompatActivity): ViewModelProvider? {
+        return ViewModelProvider(activity, activity.defaultViewModelProviderFactory)
     }
 }

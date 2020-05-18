@@ -2,6 +2,7 @@ ext.mainApp = true //标记为主app module
 apply from: rootProject.file('cc-settings-2.gradle')
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
@@ -15,6 +16,8 @@ android {
         targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        // 这里添加
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -35,8 +38,13 @@ android {
 dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$constraint_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.2.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.2.2'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.android.support:multidex:1.0.3'
     implementation 'androidx.core:core-ktx:1.2.0'
+    kapt  "com.android.databinding:compiler:3.6.3"//和gradle版本号同步
     api project(':commonlib')
     addComponent 'businessmine'
 }

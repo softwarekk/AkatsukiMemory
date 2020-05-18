@@ -2,6 +2,7 @@ ext.alwaysLib=true
 apply from: rootProject.file('cc-settings-2.gradle')
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
@@ -35,15 +36,13 @@ android {
 
 dependencies {
     //基于arc构建的项目  如果组件存在不依赖arc根据自己的组件业务上调或下沉 总之根据业务做依赖位移
-    api "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
-    api "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-    api "androidx.constraintlayout:constraintlayout:$constraint_version"
-    api "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
-    api "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+    api "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
     api "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
-    api "androidx.lifecycle:lifecycle-service:$lifecycle_version"
-    api "androidx.lifecycle:lifecycle-process:$lifecycle_version"
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    api "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    api "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+    api "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
     api "androidx.appcompat:appcompat:$appcompat_version"
+    kapt  "com.android.databinding:compiler:3.6.3"
+    api 'androidx.multidex:multidex:2.0.1'
     api 'androidx.core:core-ktx:1.2.0'
 }
