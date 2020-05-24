@@ -9,19 +9,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
-import androidx.multidex.MultiDexApplication
-import com.billy.cc.core.component.BuildConfig
-import com.billy.cc.core.component.CC
 
 /**
+ * 架构基建 和业务无关
  */
-open class BaseApplication : MultiDexApplication(),ViewModelStoreOwner {
+open class BaseApplication : Application(),ViewModelStoreOwner {
+    private var mAppViewModelStore: ViewModelStore? = null
+    private var mFactory: ViewModelProvider.Factory? = null
     override fun onCreate() {
         super.onCreate()
         mAppViewModelStore = ViewModelStore()
-        CC.enableDebug(BuildConfig.DEBUG)
-        CC.enableVerboseLog(BuildConfig.DEBUG)
-        CC.enableRemoteCC(BuildConfig.DEBUG)
         sApplication = this
     }
 
@@ -53,10 +50,6 @@ open class BaseApplication : MultiDexApplication(),ViewModelStoreOwner {
         }
     }
 
-    private var mAppViewModelStore: ViewModelStore? = null
-    private var mFactory: ViewModelProvider.Factory? = null
-
-
     override fun getViewModelStore(): ViewModelStore {
         return mAppViewModelStore!!
     }
@@ -75,11 +68,11 @@ open class BaseApplication : MultiDexApplication(),ViewModelStoreOwner {
         }
         return mFactory!!
     }
-    private fun checkActivity(fragment: Fragment): Activity {
+    open fun checkActivity(fragment: Fragment): Activity {
         return fragment.activity
             ?: throw IllegalStateException("Can't create ViewModelProvider for detached fragment")
     }
-    private fun checkApplication(activity: Activity): Application {
+    open fun checkApplication(activity: Activity): Application {
         return activity.application
             ?: throw java.lang.IllegalStateException(
                 "Your activity/fragment is not yet attached to "

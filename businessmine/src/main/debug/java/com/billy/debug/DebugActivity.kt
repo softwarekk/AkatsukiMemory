@@ -3,12 +3,11 @@ package com.billy.debug
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import com.billy.android.component.user.R
 import com.young.businessmine.TestActivity
 
-
+//组件启动 入口
 class DebugActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,20 +1,25 @@
 package com.young.baselib.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import com.young.baselib.viewmodel.BaseViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.young.baselib.BaseApplication
+import com.young.baselib.viewmodel.BaseUIViewMode
 
 /**
  * fragment 最基件
  */
-abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel?> :
+abstract class BaseFragment<V : ViewDataBinding, VM : BaseUIViewMode?> :
     Fragment() {
+    protected var mActivity: AppCompatActivity? = null
     private var viewModel: VM? = null
     private var viewDataBinding: V? = null
     private var mFragmentTag = ""
@@ -23,6 +28,8 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel?> :
     @get:LayoutRes
     abstract val layoutId: Int
     abstract fun getViewModel(): VM
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -47,5 +54,23 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel?> :
         } else {
         }
         viewDataBinding?.lifecycleOwner = this
+    }
+
+    protected open fun getAppViewModelProvider(): ViewModelProvider? {
+        return (mActivity?.getApplicationContext() as BaseApplication).getAppViewModelProvider(mActivity!!)
+    }
+
+    // 给所有的fragment提供的函数，可以顺利的拿到 ViewModel
+    protected open fun getFragmentViewModelProvider(fragment: Fragment): ViewModelProvider? {
+        return ViewModelProvider(fragment, fragment.defaultViewModelProviderFactory)
+    }
+
+    // 给所有的fragment提供的函数，可以顺利的拿到 ViewModel
+    protected open fun getActivityViewModelProvider(activity: AppCompatActivity): ViewModelProvider? {
+        return ViewModelProvider(activity, activity.defaultViewModelProviderFactory)
+    }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mActivity = context as AppCompatActivity
     }
 }

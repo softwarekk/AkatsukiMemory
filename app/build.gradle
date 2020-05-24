@@ -3,7 +3,7 @@ apply from: rootProject.file('cc-settings-2.gradle')
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-
+apply plugin: "androidx.navigation.safeargs.kotlin"
 android {
     compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion rootProject.buildToolsVersion
@@ -46,5 +46,5 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.2.0'
     kapt  "com.android.databinding:compiler:3.6.3"//和gradle版本号同步
     api project(':commonlib')
-    addComponent 'businessmine'
+    implementation project(':businessmine')
 }

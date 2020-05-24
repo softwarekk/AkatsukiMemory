@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/rateFragment"
-        android:name="com.young.akatsuki.ui.RateFragment"
+        android:name="c"
         android:label="fragment_rate"
         tools:layout="@layout/fragment_rate" />
 </navigation>

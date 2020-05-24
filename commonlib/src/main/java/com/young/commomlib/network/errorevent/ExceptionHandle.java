@@ -1,4 +1,4 @@
-package com.young.commomlib.network.errorhandler;
+package com.young.commomlib.network.errorevent;
 
 import android.net.ParseException;
 
@@ -11,8 +11,6 @@ import org.json.JSONException;
 import java.net.ConnectException;
 
 /**
- * Created by Allen on 2017/7/20.
- * 保留所有版权，未经允许请不要分享到互联网和其他人
  */
 public class ExceptionHandle {
 

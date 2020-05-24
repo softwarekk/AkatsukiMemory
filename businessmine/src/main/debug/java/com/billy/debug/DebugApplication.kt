@@ -1,6 +1,6 @@
 package com.billy.debug
 
-import com.young.baselib.BaseApplication
+import com.young.commomlib.base.CommonApplication
 
-class DebugApplication : BaseApplication() {
+class DebugApplication : CommonApplication() {
 }

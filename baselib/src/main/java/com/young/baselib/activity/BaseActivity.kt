@@ -7,13 +7,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.young.baselib.BaseApplication
-import com.young.baselib.viewmodel.BaseViewModel
+import com.young.baselib.viewmodel.BaseUIViewMode
 
 /**
 
-- BaseActivity 最基件
+- BaseActivity 最基件 架构级别
  */
-abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> :
+abstract class BaseActivity<V : ViewDataBinding, VM : BaseUIViewMode> :
     AppCompatActivity {
 
 
