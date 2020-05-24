@@ -1,9 +1,8 @@
 package com.young.akatsuki
 
-import com.billy.cc.core.component.CC
-import com.young.baselib.BaseApplication
+import com.young.commomlib.base.CommonApplication
 
-class MainApplication : BaseApplication() {
+class MainApplication : CommonApplication() {
     override fun onCreate() {
         super.onCreate()
     }

@@ -1,12 +1,10 @@
-package com.young.commomlib.network.errorhandler;
+package com.young.commomlib.network.errorevent;
 
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;
 
 /**
- * Created by Allen on 2017/7/20.
- * 保留所有版权，未经允许请不要分享到互联网和其他人
  */
 
 /**
@@ -16,7 +14,7 @@ import io.reactivex.functions.Function;
  */
 public class HttpErrorHandler<T> implements Function<Throwable, Observable<T>> {
     @Override
-    public io.reactivex.Observable<T> apply(Throwable throwable) throws Exception {
-        return io.reactivex.Observable.error(ExceptionHandle.handleException(throwable));
+    public Observable<T> apply(Throwable throwable) throws Exception {
+        return Observable.error(ExceptionHandle.handleException(throwable));
     }
 }

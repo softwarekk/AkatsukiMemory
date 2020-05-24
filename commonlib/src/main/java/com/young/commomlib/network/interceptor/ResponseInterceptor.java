@@ -1,5 +1,8 @@
 package com.young.commomlib.network.interceptor;
 
+
+import com.young.baselib.utils.TLog;
+
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 
@@ -9,8 +12,6 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 
 /**
- * Created by Allen on 2017/7/20.
- * 保留所有版权，未经允许请不要分享到互联网和其他人
  */
 public class ResponseInterceptor implements Interceptor {
 
@@ -31,6 +32,7 @@ public class ResponseInterceptor implements Interceptor {
             throw e;
         }
         String rawJson = response.body() == null ? "" : response.body().string();
+        TLog.log("testResonseinterceptor","1111"+rawJson);
         return response.newBuilder().body(ResponseBody.create(response.body().contentType(), rawJson)).build();
     }
 }

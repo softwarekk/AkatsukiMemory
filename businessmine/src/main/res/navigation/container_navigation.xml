@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container_navigation"
+    app:startDestination="@id/lanucherFragment">
+
+    <fragment
+        android:id="@+id/lanucherFragment"
+        android:name="com.young.businessmine.ui.fragment.LanucherFragment"
+        android:label="LanucherFragment" >
+        <action
+            android:id="@+id/action_lanucherFragment_to_firstshowfragment"
+            app:destination="@id/firstshowfragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/firstshowfragment"
+        android:name="com.young.businessmine.ui.fragment.FirstShowFragment"
+        android:label="FirstShowFragment" />
+
+</navigation>

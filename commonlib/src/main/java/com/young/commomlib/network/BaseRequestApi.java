@@ -2,7 +2,7 @@ package com.young.commomlib.network;
 
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import com.young.commomlib.network.errorhandler.HttpErrorHandler;
+import com.young.commomlib.network.errorevent.HttpErrorHandler;
 import com.young.commomlib.network.interceptor.RequestInterceptor;
 import com.young.commomlib.network.interceptor.ResponseInterceptor;
 
