@@ -1,7 +1,6 @@
 package com.young.businessmine.ui.fragment
 
 import android.os.Bundle
-import com.young.baselib.fragment.BaseFragment
 import com.young.businessmine.BR
 import com.young.businessmine.R
 import com.young.businessmine.databinding.FragmentLancherLayoutBinding
@@ -20,6 +19,7 @@ class LanucherFragment : CommonFragment<FragmentLancherLayoutBinding, LanucherVM
         super.onCreate(savedInstanceState)
         nav()?.navigate(R.id.action_lanucherFragment_to_firstshowfragment)
 
+
     }
 
     override val bindingVariable: Int
@@ -27,7 +27,7 @@ class LanucherFragment : CommonFragment<FragmentLancherLayoutBinding, LanucherVM
     override val layoutId: Int
         get() = R.layout.fragment_lancher_layout
 
-    override fun getViewModel(): LanucherVM {
+    override fun getUIViewModel(): LanucherVM {
         return getFragmentViewModelProvider(this)?.get(LanucherVM::class.java)!!
     }
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="PageStatusView">
+        <attr name="status_text_color" format="color" />
+        <attr name="status_text_size" format="dimension" />
+        <attr name="status_img_lottie" format="boolean" />
+        <attr name="status_lottie_source" format="string" />
+        <attr name="status_img_source" format="string" />
+    </declare-styleable>
+
+
+</resources>

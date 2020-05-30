@@ -23,11 +23,13 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseUIViewMode?> :
     private var viewModel: VM? = null
     private var viewDataBinding: V? = null
     private var mFragmentTag = ""
-    abstract val bindingVariable: Int
 
+
+
+    abstract val bindingVariable: Int
     @get:LayoutRes
     abstract val layoutId: Int
-    abstract fun getViewModel(): VM
+    abstract fun getUIViewModel(): VM
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +50,7 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseUIViewMode?> :
         savedInstanceState: Bundle?
     ) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = getViewModel()
+        viewModel = getUIViewModel()
         if (bindingVariable > 0 && viewModel != null) {
             viewDataBinding?.setVariable(bindingVariable, viewModel)
         } else {
@@ -72,5 +74,8 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseUIViewMode?> :
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mActivity = context as AppCompatActivity
+    }
+    fun getBinding() : V{
+        return viewDataBinding!!
     }
 }
