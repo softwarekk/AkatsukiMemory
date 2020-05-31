@@ -43,4 +43,6 @@ android {
 dependencies {
     implementation project(':commonlib')
     kapt  "com.android.databinding:compiler:3.6.3"
+    api project(':supportlib')
+
 }

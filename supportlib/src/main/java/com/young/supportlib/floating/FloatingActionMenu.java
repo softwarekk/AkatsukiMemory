@@ -158,9 +158,9 @@ public class FloatingActionMenu extends ViewGroup {
         mMenuColorRipple = attr.getColor(R.styleable.FloatingActionMenu_menu_colorRipple, 0x99FFFFFF);
         mAnimationDelayPerItem = attr.getInt(R.styleable.FloatingActionMenu_menu_animationDelayPerItem, 50);
         mIcon = attr.getDrawable(R.styleable.FloatingActionMenu_menu_icon);
-        if (mIcon == null) {
-            mIcon = getResources().getDrawable(R.drawable.audio_content_ban_holder);
-        }
+//        if (mIcon == null) {
+//            mIcon = getResources().getDrawable(R.drawable.first_nagivagion_btn_bg);
+//        }
         mLabelsSingleLine = attr.getBoolean(R.styleable.FloatingActionMenu_menu_labels_singleLine, false);
         mLabelsEllipsize = attr.getInt(R.styleable.FloatingActionMenu_menu_labels_ellipsize, 0);
         mLabelsMaxLines = attr.getInt(R.styleable.FloatingActionMenu_menu_labels_maxLines, -1);

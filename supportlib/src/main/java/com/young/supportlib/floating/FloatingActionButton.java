@@ -1,5 +1,6 @@
 package com.young.supportlib.floating;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -33,12 +34,12 @@ import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.young.baselib.utils.TLog;
 import com.young.supportlib.R;
 
-public class FloatingActionButton extends ImageButton {
+public class FloatingActionButton extends androidx.appcompat.widget.AppCompatImageButton {
 
     public static final int SIZE_NORMAL = 0;
     public static final int SIZE_MINI = 1;
@@ -113,36 +114,36 @@ public class FloatingActionButton extends ImageButton {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public FloatingActionButton(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
+        super(context, attrs, defStyleAttr);
         init(context, attrs, defStyleAttr);
     }
 
     private void init(Context context, AttributeSet attrs, int defStyleAttr) {
-        TypedArray attr = context.obtainStyledAttributes(attrs, R.styleable.FloatingActionButton, defStyleAttr, 0);
-        mColorNormal = attr.getColor(R.styleable.FloatingActionButton_fab_colorNormal, 0xFFDA4336);
-        mColorPressed = attr.getColor(R.styleable.FloatingActionButton_fab_colorPressed, 0xFFE75043);
-        mColorDisabled = attr.getColor(R.styleable.FloatingActionButton_fab_colorDisabled, 0xFFAAAAAA);
-        mColorRipple = attr.getColor(R.styleable.FloatingActionButton_fab_colorRipple, 0x99FFFFFF);
-        mShowShadow = attr.getBoolean(R.styleable.FloatingActionButton_fab_showShadow, true);
-        mShadowColor = attr.getColor(R.styleable.FloatingActionButton_fab_shadowColor, 0x66000000);
-        mShadowRadius = attr.getDimensionPixelSize(R.styleable.FloatingActionButton_fab_shadowRadius, mShadowRadius);
-        mShadowXOffset = attr.getDimensionPixelSize(R.styleable.FloatingActionButton_fab_shadowXOffset, mShadowXOffset);
-        mShadowYOffset = attr.getDimensionPixelSize(R.styleable.FloatingActionButton_fab_shadowYOffset, mShadowYOffset);
-        mFabSize = attr.getInt(R.styleable.FloatingActionButton_fab_size, SIZE_NORMAL);
-        mLabelText = attr.getString(R.styleable.FloatingActionButton_fab_label);
-        mShouldProgressIndeterminate = attr.getBoolean(R.styleable.FloatingActionButton_fab_progress_indeterminate, false);
-        mProgressColor = attr.getColor(R.styleable.FloatingActionButton_fab_progress_color, 0xFF009688);
-        mProgressBackgroundColor = attr.getColor(R.styleable.FloatingActionButton_fab_progress_backgroundColor, 0x4D000000);
-        mProgressMax = attr.getInt(R.styleable.FloatingActionButton_fab_progress_max, mProgressMax);
-        mShowProgressBackground = attr.getBoolean(R.styleable.FloatingActionButton_fab_progress_showBackground, true);
-
-        if (attr.hasValue(R.styleable.FloatingActionButton_fab_progress)) {
-            mProgress = attr.getInt(R.styleable.FloatingActionButton_fab_progress, 0);
+        TypedArray attr = context.obtainStyledAttributes(attrs, R.styleable.FloatingActionButtonView, defStyleAttr, 0);
+        mColorNormal = attr.getColor(R.styleable.FloatingActionButtonView_fab_colorNormal, 0xFFDA4336);
+        mColorPressed = attr.getColor(R.styleable.FloatingActionButtonView_fab_colorPressed, 0xFFE75043);
+        mColorDisabled = attr.getColor(R.styleable.FloatingActionButtonView_fab_colorDisabled, 0xFFAAAAAA);
+        mColorRipple = attr.getColor(R.styleable.FloatingActionButtonView_fab_colorRipple, 0x99FFFFFF);
+        mShowShadow = attr.getBoolean(R.styleable.FloatingActionButtonView_fab_showShadow, true);
+        mShadowColor = attr.getColor(R.styleable.FloatingActionButtonView_fab_shadowColor, 0x66000000);
+        mShadowRadius = attr.getDimensionPixelSize(R.styleable.FloatingActionButtonView_fab_shadowRadius, mShadowRadius);
+        mShadowXOffset = attr.getDimensionPixelSize(R.styleable.FloatingActionButtonView_fab_shadowXOffset, mShadowXOffset);
+        mShadowYOffset = attr.getDimensionPixelSize(R.styleable.FloatingActionButtonView_fab_shadowYOffset, mShadowYOffset);
+        mFabSize = attr.getInt(R.styleable.FloatingActionButtonView_fab_viewsize, SIZE_MINI);
+        mLabelText = attr.getString(R.styleable.FloatingActionButtonView_fab_label);
+        mShouldProgressIndeterminate = attr.getBoolean(R.styleable.FloatingActionButtonView_fab_progress_indeterminate, false);
+        mProgressColor = attr.getColor(R.styleable.FloatingActionButtonView_fab_progress_color, 0xFF009688);
+        mProgressBackgroundColor = attr.getColor(R.styleable.FloatingActionButtonView_fab_progress_backgroundColor, 0x4D000000);
+        mProgressMax = attr.getInt(R.styleable.FloatingActionButtonView_fab_progress_max, mProgressMax);
+        mShowProgressBackground = attr.getBoolean(R.styleable.FloatingActionButtonView_fab_progress_showBackground, true);
+        TLog.log("test_tab_size",mFabSize+"————1111122223");
+        if (attr.hasValue(R.styleable.FloatingActionButtonView_fab_progress)) {
+            mProgress = attr.getInt(R.styleable.FloatingActionButtonView_fab_progress, 0);
             mShouldSetProgress = true;
         }
 
-        if (attr.hasValue(R.styleable.FloatingActionButton_fab_elevationCompat)) {
-            float elevation = attr.getDimensionPixelOffset(R.styleable.FloatingActionButton_fab_elevationCompat, 0);
+        if (attr.hasValue(R.styleable.FloatingActionButtonView_fab_elevationCompat)) {
+            float elevation = attr.getDimensionPixelOffset(R.styleable.FloatingActionButtonView_fab_elevationCompat, 0);
             if (isInEditMode()) {
                 setElevation(elevation);
             } else {
@@ -168,12 +169,12 @@ public class FloatingActionButton extends ImageButton {
     }
 
     private void initShowAnimation(TypedArray attr) {
-        int resourceId = attr.getResourceId(R.styleable.FloatingActionButton_fab_showAnimation, R.anim.fab_scale_up);
+        int resourceId = attr.getResourceId(R.styleable.FloatingActionButtonView_fab_showAnimation, R.anim.fab_scale_up);
         mShowAnimation = AnimationUtils.loadAnimation(getContext(), resourceId);
     }
 
     private void initHideAnimation(TypedArray attr) {
-        int resourceId = attr.getResourceId(R.styleable.FloatingActionButton_fab_hideAnimation, R.anim.fab_scale_down);
+        int resourceId = attr.getResourceId(R.styleable.FloatingActionButtonView_fab_hideAnimation, R.anim.fab_scale_down);
         mHideAnimation = AnimationUtils.loadAnimation(getContext(), resourceId);
     }
 
@@ -712,6 +713,7 @@ public class FloatingActionButton extends ImageButton {
 
         }
 
+        @SuppressLint("WrongConstant")
         @Override
         public int getOpacity() {
             return 0;

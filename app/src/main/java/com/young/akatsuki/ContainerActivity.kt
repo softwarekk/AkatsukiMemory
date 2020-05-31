@@ -9,7 +9,6 @@ class ContainerActivity : CommonBaseActivity<ActivityMainBinding, ContainerVM>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
     override fun getViewModel(): ContainerVM {
         return getActivityViewModelProvider(this)!!.get(ContainerVM::class.java) //To change body of created functions use File | Settings | File Templates.

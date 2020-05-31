@@ -10,13 +10,15 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#1b1b1b">
 
         <ImageView
             android:id="@+id/lanuch_logo_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/akatsuki"
+            android:layout_width="100dp"
+            android:layout_height="87.7dp"
+            android:src="@drawable/launch_bg"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

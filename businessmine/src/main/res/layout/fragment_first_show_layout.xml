@@ -11,13 +11,63 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#000000">
+
         <com.young.commomlib.widget.PageStatusView
             android:id="@+id/loading_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:status_img_source="@drawable/akatsuki"
-            app:status_text_size="13sp"
-            app:status_text_color="@color/colorAccent"></com.young.commomlib.widget.PageStatusView>
+            app:status_img_source="@drawable/loading"
+            app:status_text_color="@color/colorAccent"
+            app:status_text_size="13sp"></com.young.commomlib.widget.PageStatusView>
+
+        <com.young.supportlib.floating.FloatingActionMenu
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.898"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.931"
+            app:menu_fab_size="normal"
+            app:menu_colorPressed="#990033"
+            app:menu_colorRipple="#990033"
+            app:menu_shadowColor="#990033"
+            app:menu_fab_show_animation="@anim/fab_slide_in_from_right"
+            app:menu_openDirection="up"
+            app:menu_labels_textColor="#990033"
+            app:menu_icon="@drawable/xiao_nagivagion_btn_bg">
+            <com.young.supportlib.floating.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_label="临之书"
+                app:fab_viewsize="mini"
+                android:src="@drawable/tab_lin"></com.young.supportlib.floating.FloatingActionButton>
+            <com.young.supportlib.floating.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_label="兵之书"
+                app:fab_viewsize="mini"
+                android:src="@drawable/tab_bing"></com.young.supportlib.floating.FloatingActionButton>
+
+            <com.young.supportlib.floating.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_label="斗之书"
+                app:fab_viewsize="mini"
+                android:src="@drawable/tab_dou"/>
+
+            <com.young.supportlib.floating.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_label="者之书"
+                app:fab_viewsize="mini"
+                android:src="@drawable/tab_zhe"></com.young.supportlib.floating.FloatingActionButton>
+
+        </com.young.supportlib.floating.FloatingActionMenu>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

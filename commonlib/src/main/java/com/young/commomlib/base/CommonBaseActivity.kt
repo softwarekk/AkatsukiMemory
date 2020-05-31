@@ -19,10 +19,7 @@ abstract class CommonBaseActivity<V : ViewDataBinding, VM : BaseUIViewMode> : Ba
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // 给工具类初始化
-
-        // 给工具类初始化
-        BarUtils.setStatusBarColor(this, Color.TRANSPARENT)
-        BarUtils.setStatusBarLightMode(this, true)
+        BarUtils.setStatusBarVisibility(this,false)
         mCommonModel= getAppViewModelProvider()!!.get(CommonShareVM::class.java)
     }
     override fun onDestroy() {

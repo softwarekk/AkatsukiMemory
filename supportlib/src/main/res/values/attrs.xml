@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="FloatingActionButton">
+    <declare-styleable name="FloatingActionButtonView">
         <attr name="fab_colorNormal" format="color" />
         <attr name="fab_colorPressed" format="color" />
         <attr name="fab_colorDisabled" format="color" />
@@ -11,7 +11,7 @@
         <attr name="fab_shadowRadius" format="dimension" />
         <attr name="fab_shadowXOffset" format="dimension" />
         <attr name="fab_shadowYOffset" format="dimension" />
-        <attr name="fab_size" format="enum">
+        <attr name="fab_viewsize" format="enum">
             <enum name="normal" value="0" />
             <enum name="mini" value="1" />
         </attr>
