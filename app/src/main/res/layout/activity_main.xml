@@ -13,13 +13,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ContainerActivity">
-        <fragment
-            android:id="@+id/main_fragment_host"
-            android:name="androidx.navigation.fragment.NavHostFragment"
+        <androidx.slidingpanelayout.widget.SlidingPaneLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            app:defaultNavHost="true"
-            app:navGraph="@navigation/container_navigation" />
+            android:layout_height="match_parent">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/left_recycleview"
+                android:layout_width="100dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_height="match_parent"
+                android:background="#008577"/>
+            <fragment
+                android:id="@+id/main_fragment_host"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:defaultNavHost="true"
+                app:navGraph="@navigation/container_navigation" />
+        </androidx.slidingpanelayout.widget.SlidingPaneLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

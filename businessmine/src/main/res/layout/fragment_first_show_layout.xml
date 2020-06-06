@@ -20,9 +20,10 @@
             android:layout_height="match_parent"
             app:status_img_source="@drawable/loading"
             app:status_text_color="@color/colorAccent"
-            app:status_text_size="13sp"></com.young.commomlib.widget.PageStatusView>
+            app:status_text_size="13sp" />
 
         <com.young.supportlib.floating.FloatingActionMenu
+            android:id="@+id/flota"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -39,18 +40,20 @@
             app:menu_openDirection="up"
             app:menu_labels_textColor="#990033"
             app:menu_icon="@drawable/xiao_nagivagion_btn_bg">
+
             <com.young.supportlib.floating.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:fab_label="临之书"
                 app:fab_viewsize="mini"
-                android:src="@drawable/tab_lin"></com.young.supportlib.floating.FloatingActionButton>
+                android:src="@drawable/tab_lin" />
+
             <com.young.supportlib.floating.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:fab_label="兵之书"
                 app:fab_viewsize="mini"
-                android:src="@drawable/tab_bing"></com.young.supportlib.floating.FloatingActionButton>
+                android:src="@drawable/tab_bing" />
 
             <com.young.supportlib.floating.FloatingActionButton
                 android:layout_width="wrap_content"
@@ -64,10 +67,8 @@
                 android:layout_height="wrap_content"
                 app:fab_label="者之书"
                 app:fab_viewsize="mini"
-                android:src="@drawable/tab_zhe"></com.young.supportlib.floating.FloatingActionButton>
-
+                android:src="@drawable/tab_zhe" />
         </com.young.supportlib.floating.FloatingActionMenu>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

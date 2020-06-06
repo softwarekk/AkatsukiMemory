@@ -12,10 +12,18 @@
         <action
             android:id="@+id/action_lanucherFragment_to_firstshowfragment"
             app:destination="@id/firstshowfragment" />
+        <action
+            android:id="@+id/action_lanucherFragment_to_listFragment"
+            app:destination="@id/listFragment" />
     </fragment>
     <fragment
         android:id="@+id/firstshowfragment"
         android:name="com.young.businessmine.ui.fragment.FirstShowFragment"
         android:label="FirstShowFragment" />
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.young.businessmine.ui.fragment.ListFragment"
+        android:label="list_fragment"
+        tools:layout="@layout/list_fragment" />
 
 </navigation>

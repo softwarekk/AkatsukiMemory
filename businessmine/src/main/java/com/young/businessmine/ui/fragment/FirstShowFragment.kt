@@ -13,7 +13,7 @@ class FirstShowFragment : CommonFragment<FragmentFirstShowLayoutBinding,FirstSho
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getBinding()?.loadingView?.setPageStatus(Constants.PAGE_LOADING)
+//        getBinding()?.loadingView?.setPageStatus(Constants.PAGE_LOADING)
     }
     override val bindingVariable: Int
         get() =BR.lanucher_vm
