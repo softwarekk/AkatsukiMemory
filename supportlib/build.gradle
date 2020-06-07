@@ -27,5 +27,6 @@ android {
 }
 
 dependencies {
-    implementation project(':commonlib')
+    api project(':commonlib')
+    implementation files('libs\\pldroid-player-2.1.9.jar')
 }

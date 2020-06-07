@@ -19,11 +19,14 @@
     <fragment
         android:id="@+id/firstshowfragment"
         android:name="com.young.businessmine.ui.fragment.FirstShowFragment"
-        android:label="FirstShowFragment" />
+        android:label="FirstShowFragment" >
+        <action
+            android:id="@+id/action_firstshowfragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
     <fragment
         android:id="@+id/listFragment"
         android:name="com.young.businessmine.ui.fragment.ListFragment"
-        android:label="list_fragment"
-        tools:layout="@layout/list_fragment" />
+        android:label="list_fragment" />
 
 </navigation>
