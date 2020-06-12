@@ -2,6 +2,7 @@ package com.young.businessmine.ui.fragment
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.content.res.AssetFileDescriptor
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -11,9 +12,11 @@ import com.young.businessmine.R
 import com.young.businessmine.databinding.FragmentLancherLayoutBinding
 import com.young.businessmine.ui.viewmodel.LanucherVM
 import com.young.commomlib.base.CommonFragment
+import com.young.supportlib.AudioPlayer
 import com.young.supportlib.bloom.Bloom
 import com.young.supportlib.bloom.effector.BloomEffector
 import com.young.supportlib.bloom.listener.BloomListener
+
 
 /*
  * Des
@@ -24,6 +27,8 @@ class LanucherFragment : CommonFragment<FragmentLancherLayoutBinding, LanucherVM
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+//        val fd: AssetFileDescriptor = activity?.getAssets()?.openFd("pain_start_two.mp3")!!
+//        AudioPlayer.setSourceStart(fd.toString())
         Handler().postDelayed(Runnable {
             Bloom.with(activity)
                 .setParticleRadius(12f)

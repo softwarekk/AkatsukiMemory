@@ -15,7 +15,9 @@ class FirstShowFragment : CommonFragment<FragmentFirstShowLayoutBinding,FirstSho
         super.onViewCreated(view, savedInstanceState)
 //        getBinding()?.loadingView?.setPageStatus(Constants.PAGE_LOADING)
 //        nav()?.navigate(R.id.action_firstshowfragment_to_listFragment)
-        nav()?.popBackStack()
+        getBinding().testBtn.setOnClickListener(View.OnClickListener {
+            nav()?.navigate(R.id.action_firstshowfragment_to_listFragment)
+        })
     }
 
     override val bindingVariable: Int
