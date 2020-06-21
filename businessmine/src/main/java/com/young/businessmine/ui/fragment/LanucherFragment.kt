@@ -29,8 +29,6 @@ class LanucherFragment : BusinessMineBaseFragment<FragmentLancherLayoutBinding, 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        val fd: AssetFileDescriptor = activity?.getAssets()?.openFd("pain_start_two.mp3")!!
-//        AudioPlayer.setSourceStart(fd.toString())
         Handler().postDelayed(Runnable {
             Bloom.with(activity)
                 .setParticleRadius(12f)

@@ -1,6 +1,7 @@
 package com.young.businessmine.ui.activity
 
 import android.os.Bundle
+import android.view.KeyEvent
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -29,9 +30,9 @@ class ContainerActivity : BusinessMineBaseActivity<ActivityMainBinding, Containe
     }
 
     private fun initObserVer() {
-       mContainerVM.startHide.observe(this, Observer<Boolean> {
+        mContainerVM.startHide.observe(this, Observer<Boolean> {
             getViewModel().graphChange.value=it
-       })
+        })
     }
 
     override fun getViewModel(): ContainerUIViewModel {
@@ -44,8 +45,41 @@ class ContainerActivity : BusinessMineBaseActivity<ActivityMainBinding, Containe
         destination: NavDestination,
         arguments: Bundle?
     ) {
-        if(destination.label?.equals("FirstShowFragment")!!){
-            navigationCT?.popBackStack(destination.id,false)
+//        if(destination.label?.equals("FirstShowFragment")!!){
+//            navigationCT?.popBackStack(destination.id,false)
+//        }
+    }
+    var clickTime:Long?=null
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        TLog.log(LOG_TAG,event?.action.toString())
+        when(event?.action){
+            KeyEvent.KEYCODE_UNKNOWN->{
+                TLog.log(LOG_TAG, "111$event"+navigationCT?.currentDestination?.label?.equals("FirstShowFragment"))
+                if(navigationCT?.currentDestination?.label?.equals("FirstShowFragment")!!) {
+                    if(clickTime!=null) {
+                        var curretnTime = System.currentTimeMillis()
+                        var intervalTime = curretnTime.minus(clickTime!!)
+                        TLog.log(LOG_TAG, intervalTime.toString())
+                        if (intervalTime <= 1500) {
+                            finish()
+                            return false
+                        }else{
+                            clickTime=System.currentTimeMillis()
+                            showToast("再次点击退出")
+                            return false
+                        }
+                    }else{
+                        clickTime=System.currentTimeMillis()
+                        showToast("再次点击退出")
+                        return false
+                    }
+                }else{
+                    TLog.log(LOG_TAG, "111$event")
+                    navigationCT?.navigateUp()
+                    return false
+                }
+            }
         }
+        return super.onKeyDown(keyCode, event)
     }
 }

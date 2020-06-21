@@ -47,7 +47,7 @@ class StartShowView :View {
     }
 
     private fun initData() {
-        bgBitmap=BitmapFactory.decodeResource(this.context.getResources(), R.drawable.start_show_bg);
+        bgBitmap=BitmapFactory.decodeResource(this.context.getResources(), R.drawable.bg_juan_shou);
         paintBg=Paint()
         paintText= Paint()
     }

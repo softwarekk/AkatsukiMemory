@@ -1,6 +1,7 @@
 package com.young.baselib.activity
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -51,4 +52,8 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseUIViewMode> :
     protected  fun getActivityViewModelProvider(activity: AppCompatActivity): ViewModelProvider? {
         return ViewModelProvider(activity, activity.defaultViewModelProviderFactory)
     }
+    fun showToast(message:String){
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
+
 }
