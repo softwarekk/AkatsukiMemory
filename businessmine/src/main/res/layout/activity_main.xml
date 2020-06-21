@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"></import>
         <variable
             name="containervm"
-            type="com.young.businessmine.ui.viewmodel.ContainerVM" />
+            type="com.young.businessmine.ui.viewmodel.ContainerUIViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,6 +32,18 @@
                 app:defaultNavHost="true"
                 app:navGraph="@navigation/container_navigation" />
         </androidx.slidingpanelayout.widget.SlidingPaneLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{containervm.graphChange?View.GONE:View.VISIBLE}">
+            <fragment
+                android:id="@+id/launch_fragment_host"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:defaultNavHost="true"
+                app:navGraph="@navigation/start_logic_navigation" />
 
+        </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

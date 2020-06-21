@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/start_logic_navigation"
+    app:startDestination="@id/lanucherFragment">
+    <fragment
+        android:id="@+id/lanucherFragment"
+        android:name="com.young.businessmine.ui.fragment.LanucherFragment"
+        android:label="LanucherFragment" >
+    </fragment>
+</navigation>
