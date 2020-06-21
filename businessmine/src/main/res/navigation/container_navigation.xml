@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container_navigation"
-    app:startDestination="@id/lanucherFragment">
+    app:startDestination="@id/firstshowfragment">
 
-    <fragment
-        android:id="@+id/lanucherFragment"
-        android:name="com.young.businessmine.ui.fragment.LanucherFragment"
-        android:label="LanucherFragment" >
-        <action
-            android:id="@+id/action_lanucherFragment_to_firstshowfragment"
-            app:destination="@id/firstshowfragment" />
-        <action
-            android:id="@+id/action_lanucherFragment_to_listFragment"
-            app:destination="@id/listFragment" />
-    </fragment>
+<!--    <fragment-->
+<!--        android:id="@+id/lanucherFragment"-->
+<!--        android:name="com.young.businessmine.ui.fragment.LanucherFragment"-->
+<!--        android:label="LanucherFragment" >-->
+<!--        <action-->
+<!--            android:id="@+id/action_lanucherFragment_to_firstshowfragment"-->
+<!--            app:destination="@id/firstshowfragment" />-->
+<!--        <action-->
+<!--            android:id="@+id/action_lanucherFragment_to_listFragment"-->
+<!--            app:destination="@id/listFragment" />-->
+<!--    </fragment>-->
     <fragment
         android:id="@+id/firstshowfragment"
         android:name="com.young.businessmine.ui.fragment.FirstShowFragment"

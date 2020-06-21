@@ -14,6 +14,7 @@ import com.young.commomlib.viewmodel.CommonShareVM
  * Date 2020-05-24
  */abstract class CommonFragment<V : ViewDataBinding, VM : BaseUIViewMode>  : BaseFragment<V,VM>()
 {
+    var LOG_TAG=this.toString()
     protected var mCommonModel: CommonShareVM? = null //app 分享数据模块
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

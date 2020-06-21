@@ -9,6 +9,7 @@ import android.view.View
 import android.view.animation.BounceInterpolator
 import com.young.businessmine.BR
 import com.young.businessmine.R
+import com.young.businessmine.base.BusinessMineBaseFragment
 import com.young.businessmine.databinding.FragmentLancherLayoutBinding
 import com.young.businessmine.ui.viewmodel.LanucherVM
 import com.young.commomlib.base.CommonFragment
@@ -23,7 +24,8 @@ import com.young.supportlib.bloom.listener.BloomListener
  * Author Young
  * Date 2020-05-24
  */
-class LanucherFragment : CommonFragment<FragmentLancherLayoutBinding, LanucherVM>(),BloomListener{
+class LanucherFragment : BusinessMineBaseFragment<FragmentLancherLayoutBinding, LanucherVM>(),BloomListener{
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -66,7 +68,7 @@ class LanucherFragment : CommonFragment<FragmentLancherLayoutBinding, LanucherVM
             .setListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
                     getBinding()?.lanuchLogoImg.setClickable(true)
-                    nav()?.navigate(R.id.action_lanucherFragment_to_firstshowfragment)
+                    mContainerVM.startHide.value=true
                 }
             })
             .scaleX(1f)
