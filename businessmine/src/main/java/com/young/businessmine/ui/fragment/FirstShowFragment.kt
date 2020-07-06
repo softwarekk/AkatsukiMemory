@@ -53,4 +53,10 @@ class FirstShowFragment : BusinessMineBaseFragment<FragmentFirstShowLayoutBindin
         TLog.log(LOG_TAG,"33333")
 
     }
+
+    fun initSnap(){
+        var snapHelper:PagerSnapHelper= PagerSnapHelper()
+        snapHelper.attachToRecyclerView(databinding?.chivoxContentRc)
+        addOnScrollListener(RecyclerViewPageChangeListenerHelper(snapHelper, onPageChangeListener))
+    }
 }
