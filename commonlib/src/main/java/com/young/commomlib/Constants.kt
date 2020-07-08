@@ -7,9 +7,9 @@ class Constants {
         val simpleVersion=""
 
         //UI
-        val PAGE_LOADING=1
-        val PAGE_HIDE=2
-        val PAGE_NET_ERROR=3
-        val PAGE_NO_DATA=4
+        const val PAGE_LOADING=1
+        const val PAGE_HIDE=2
+        const val PAGE_NET_ERROR=3
+        const val PAGE_NO_DATA=4
     }
 }

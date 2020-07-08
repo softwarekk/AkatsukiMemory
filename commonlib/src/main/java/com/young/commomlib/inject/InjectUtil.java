@@ -1,27 +1,21 @@
 package com.young.commomlib.inject;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleObserver;
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.OnLifecycleEvent;
 import android.view.View;
 
-import com.beile.basemoudle.utils.StringUtils;
-import com.beile.basemoudle.utils.TLog;
-import com.beile.commonlib.base.CommonBaseApplication;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.OnLifecycleEvent;
+
+import com.young.baselib.utils.TLog;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.beile.basemoudle.DealWithPermissions.CAMERAS;
-import static com.beile.basemoudle.DealWithPermissions.MICROPHONE;
-import static com.beile.basemoudle.DealWithPermissions.STORAGE;
 
 /*
  * Des 注解处理器
@@ -53,7 +47,6 @@ public class InjectUtil implements LifecycleObserver {
     }
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     public void  onDestory(){
-        TLog.log("test__inject","ondestory");
         userMethods.clear();
         context=null;
     }
@@ -65,116 +58,12 @@ public class InjectUtil implements LifecycleObserver {
     }
 
     public  void  init(){
-        if(injectpolicy.equals(InjectPolicy.P_PERMISSION)){
-            initPermission();
-            return;
-        }else if(injectpolicy.equals(InjectPolicy.P_USER_SCHOOL)){
-            initUserEvent();
-            return;
-        }else if(injectpolicy==InjectPolicy.P_CLICK){
+        if(injectpolicy==InjectPolicy.P_CLICK){
             initClick();
             return;
         }
         if(injectpolicy==null){
-            initPermission();
-            initUserEvent();
             initClick();
-        }
-    }
-    /*
-     * 处理权限
-     * */
-    private void initPermission(){
-        Class<?> clazz=context.getClass();
-        Field[] fields = clazz.getDeclaredFields();
-        for (Field field : fields) {
-            Permission pInject = field.getAnnotation(Permission.class);
-            if(pInject!=null) {
-                String targetName = pInject.tms();
-                Method targetMet= null;
-                try {
-                    targetMet = clazz.getMethod(targetName);
-                    TLog.log("test_inject_event11", targetMet + "");
-                    String[] permissionName=null;
-                    PermissionPolicy policy=pInject.value();
-                    if(policy.equals(PermissionPolicy.P_STO)){
-                        permissionName=STORAGE;
-                    }else if(policy.equals(PermissionPolicy.P_MIC)){
-                        permissionName=MICROPHONE;
-                    }else if(policy.equals(PermissionPolicy.P_CAM)){
-                        permissionName=CAMERAS;
-                    }
-                    EventInvocationHandler listenerInvocationHandler=
-                            new EventInvocationHandler(context,targetMet,InjectPolicy.P_PERMISSION,permissionName);
-
-                    //做代理   new View.OnClickListener()对象
-
-                    Object proxy= Proxy.newProxyInstance(InjectUtil.class.getClassLoader()
-                            ,new Class[]{IInjectEvent.class},listenerInvocationHandler);
-                    IInjectEvent event= (IInjectEvent) proxy;
-                    field.setAccessible(true);
-                    field.set(context,event);
-                } catch (NoSuchMethodException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-
-    private  void initUserEvent(){
-        Class<?> clazz=context.getClass();
-        Method[] declaredMethods = clazz.getDeclaredMethods();
-        TLog.log("test_inject_event11",declaredMethods.length+"");
-        for(Method mt:declaredMethods) {
-            UserSchool userSchool = mt.getAnnotation(UserSchool.class);
-            if(userSchool!=null){
-                TLog.log("test_inject_event678",""+userSchool+"__"+userMethods.size()+"__"+mt);
-                userMethods.put(userMethods.size(),mt);
-            }
-        }
-    }
-    /**
-     * 目标class
-     * @param onlyname 有效方法名
-     */
-    public void injectUserEvent(String onlyname){
-        for(int i=0;i<userMethods.size();i++){
-            Method mt=userMethods.get(i);
-            if(!StringUtils.isEmpty(onlyname)){
-                //但同一个class 中多个注解函数时 限定 作用函数
-                if(!mt.getName().equals(onlyname)){
-                    continue;
-                }
-            }
-            if(mt==null){
-                continue;
-            }
-            UserSchool userSchool = mt.getAnnotation(UserSchool.class);
-            if(CommonBaseApplication.getInstance().getLoginUser().getSchool_type().equals("2")) {
-                if (userSchool.value().equals(Userpolicy.P_SCHOOL_TEST)) {
-                    invokeM(context,mt);
-                }
-            }else if(CommonBaseApplication.getInstance().getLoginUser().getSchool_type().equals("1")) {
-                TLog.log("test_inject_event33",userSchool.value()+""+userSchool.value().equals(Userpolicy.P_SCHOOL_SIMPLE));
-                if (userSchool.value().equals(Userpolicy.P_SCHOOL_SIMPLE)) {
-                    invokeM(context,mt);
-                }
-            }
-        }
-    }
-    private  void invokeM(Object con, Method mt){
-        try {
-            mt.setAccessible(true);
-            mt.invoke(con);
-        } catch (IllegalAccessException e) {
-            TLog.log("test_inject_event4544",e.toString());
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            TLog.log("test_inject_event5555",e.toString());
-            e.printStackTrace();
         }
     }
 
@@ -188,7 +77,6 @@ public class InjectUtil implements LifecycleObserver {
         for (Method method : methods) {
             //annotation是事件比如onClick 就去取对应的注解
             OnStatisticsClick event = method.getAnnotation(OnStatisticsClick.class);
-            TLog.log("test_inject11",event+"___");
             if (event == null) {
                 continue;
             }

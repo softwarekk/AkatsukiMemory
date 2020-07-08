@@ -1,14 +1,13 @@
 package com.young.commomlib.base;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
-import android.support.v7.util.DiffUtil;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.beile.basemoudle.utils.TLog;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
@@ -112,13 +111,11 @@ public abstract class BaseBindingAdapter<DB extends ViewDataBinding,T>   extends
 
         @Override
         public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-            TLog.log("test_diff", "11"+(mOldDatas.get(oldItemPosition).hashCode()==mNewDatas.get(newItemPosition).hashCode()));
             return mOldDatas.get(oldItemPosition).hashCode()==mNewDatas.get(newItemPosition).hashCode();
         }
 
         @Override
         public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-            TLog.log("test_diff", "22"+(mOldDatas.get(oldItemPosition).hashCode()==mNewDatas.get(newItemPosition).hashCode()));
             return mOldDatas.get(oldItemPosition).hashCode()==mNewDatas.get(newItemPosition).hashCode();
         }
     }

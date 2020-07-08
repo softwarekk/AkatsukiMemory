@@ -1,7 +1,7 @@
-package com.young.commomlib.inject;
+package com.young.commomlib.utils.permission;
 
 /*
- * Des 权限策略
+ * Des 权限命中体
  * Author Young
  * Date 2020-06-11
  */

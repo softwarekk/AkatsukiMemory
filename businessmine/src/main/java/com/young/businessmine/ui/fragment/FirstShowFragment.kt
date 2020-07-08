@@ -3,6 +3,7 @@ package com.young.businessmine.ui.fragment
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
+import androidx.recyclerview.widget.PagerSnapHelper
 import com.young.baselib.utils.TLog
 import com.young.businessmine.BR
 import com.young.businessmine.R
@@ -51,12 +52,11 @@ class FirstShowFragment : BusinessMineBaseFragment<FragmentFirstShowLayoutBindin
         }
         getUIViewModel().isMenuOpen.value=false
         TLog.log(LOG_TAG,"33333")
-
     }
 
     fun initSnap(){
-        var snapHelper:PagerSnapHelper= PagerSnapHelper()
-        snapHelper.attachToRecyclerView(databinding?.chivoxContentRc)
-        addOnScrollListener(RecyclerViewPageChangeListenerHelper(snapHelper, onPageChangeListener))
+        var snapHelper: PagerSnapHelper = PagerSnapHelper()
+//        snapHelper.attachToRecyclerView(databinding?.chivoxContentRc)
+//        addOnScrollListener(RecyclerViewPageChangeListenerHelper(snapHelper, onPageChangeListener))
     }
 }
