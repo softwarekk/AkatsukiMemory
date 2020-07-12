@@ -15,13 +15,63 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#000000">
+        android:background="#000000"
+        android:clipChildren="false">
+
         <com.young.businessmine.ui.widget.StartShowView
+            android:id="@+id/startShowView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"></com.young.businessmine.ui.widget.StartShowView>
 
+        <com.young.businessmine.ui.widget.StartTextView
+            android:id="@+id/text_line_one"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintRight_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/startShowView"
+            app:layout_constraintVertical_bias="0.75"
+            app:text_bz_off="20dp"
+            app:text_color="#5b451e"
+            app:text_content="那堪曲终人散,那堪流光过隙" />
+
+        <com.young.businessmine.ui.widget.StartTextView
+            android:id="@+id/text_line_two"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintRight_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_line_one"
+            app:text_bz_off="20dp"
+            app:text_color="#5b451e"
+            app:text_content="那堪回首一起流泪戳手指"></com.young.businessmine.ui.widget.StartTextView>
+
+        <com.young.businessmine.ui.widget.StartTextView
+            android:id="@+id/text_line_three"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintRight_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_line_two"
+            app:text_bz_off="20dp"
+            app:text_color="#5b451e"
+            app:text_content="那堪岁月静好莫失莫散莫离"></com.young.businessmine.ui.widget.StartTextView>
+
+        <com.young.businessmine.ui.widget.StartTextView
+            android:id="@+id/text_line_four"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@+id/text_line_three"
+            app:text_color="#6d5129"
+            android:visibility="gone"
+            app:text_content="----致年轻过的火迷们"
+            app:text_shadowColor="@color/text_shadow_color"
+            app:text_size="24sp"></com.young.businessmine.ui.widget.StartTextView>
+
         <com.young.supportlib.floating.FloatingActionMenu
             android:id="@+id/flota"
+            floatingShow="@{first_vm.isMenuOpen}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -30,67 +80,68 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.92"
-            app:menu_fab_size="normal"
             app:menu_colorPressed="#990033"
             app:menu_colorRipple="#990033"
-            app:menu_shadowColor="#990033"
-            floatingShow="@{first_vm.isMenuOpen}"
             app:menu_fab_show_animation="@anim/fab_slide_in_from_right"
-            app:menu_openDirection="up"
+            app:menu_fab_size="normal"
+            app:menu_icon="@drawable/xiao_nagivagion_btn_bg"
             app:menu_labels_textColor="#990033"
-            app:menu_icon="@drawable/xiao_nagivagion_btn_bg">
+            app:menu_openDirection="up"
+            app:menu_shadowColor="#990033">
 
             <com.young.supportlib.floating.FloatingActionButton
-                app:fab_label="临之书"
-                app:fab_viewsize="mini"
-                floatingclick="@{floatingclick}"
                 android:id="@+id/ling_book_bt"
+                floatingclick="@{floatingclick}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:src="@drawable/tab_lin"
+                app:fab_label="临之书"
                 app:fab_showAnimation="@anim/fab_scale_up"
-                android:src="@drawable/tab_lin" />
+                app:fab_viewsize="mini" />
 
             <com.young.supportlib.floating.FloatingActionButton
                 android:id="@+id/bing_book_bt"
-                app:fab_label="兵之书"
-                app:fab_viewsize="mini"
                 floatingclick="@{floatingclick}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:src="@drawable/tab_bing"
+                app:fab_label="兵之书"
                 app:fab_showAnimation="@anim/fab_scale_up"
-                android:src="@drawable/tab_bing" />
+                app:fab_viewsize="mini" />
 
             <com.young.supportlib.floating.FloatingActionButton
                 android:id="@+id/dou_book_bt"
-                app:fab_label="斗之书"
-                app:fab_viewsize="mini"
                 floatingclick="@{floatingclick}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:src="@drawable/tab_dou"
+                app:fab_label="斗之书"
                 app:fab_showAnimation="@anim/fab_scale_up"
-                android:src="@drawable/tab_dou"/>
+                app:fab_viewsize="mini" />
 
             <com.young.supportlib.floating.FloatingActionButton
-                app:fab_label="者之书"
-                app:fab_viewsize="mini"
                 android:id="@+id/zhe_book_bt"
                 floatingclick="@{floatingclick}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:src="@drawable/tab_zhe"
+                app:fab_label="者之书"
                 app:fab_showAnimation="@anim/fab_scale_up"
-                android:src="@drawable/tab_zhe" />
+                app:fab_viewsize="mini" />
         </com.young.supportlib.floating.FloatingActionMenu>
+
         <Button
             android:id="@+id/test_btn"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:text="111"></Button>
+
         <com.young.commomlib.widget.PageStatusView
             android:id="@+id/loading_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:status_img_source="@drawable/loading"
-            app:status_text_color="@color/colorAccent"
+            app:status_text_color="@color/colorPrimaryDark"
             app:status_text_size="13sp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

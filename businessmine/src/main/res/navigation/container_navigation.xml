@@ -5,17 +5,6 @@
     android:id="@+id/container_navigation"
     app:startDestination="@id/firstshowfragment">
 
-<!--    <fragment-->
-<!--        android:id="@+id/lanucherFragment"-->
-<!--        android:name="com.young.businessmine.ui.fragment.LanucherFragment"-->
-<!--        android:label="LanucherFragment" >-->
-<!--        <action-->
-<!--            android:id="@+id/action_lanucherFragment_to_firstshowfragment"-->
-<!--            app:destination="@id/firstshowfragment" />-->
-<!--        <action-->
-<!--            android:id="@+id/action_lanucherFragment_to_listFragment"-->
-<!--            app:destination="@id/listFragment" />-->
-<!--    </fragment>-->
     <fragment
         android:id="@+id/firstshowfragment"
         android:name="com.young.businessmine.ui.fragment.FirstShowFragment"
@@ -23,13 +12,25 @@
         <action
             android:id="@+id/action_firstshowfragment_to_listFragment"
             app:destination="@id/listFragment" />
+        <action
+            android:id="@+id/action_firstshowfragment_to_memberCardFragment"
+            app:destination="@id/memberCardFragment" />
     </fragment>
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.young.businessmine.ui.fragment.ListFragment"
+        android:name="com.young.businessmine.ui.fragment.ListArticleFragment"
         android:label="list_fragment" >
         <action
             android:id="@+id/action_listFragment_to_firstshowfragment"
+            app:destination="@id/firstshowfragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/memberCardFragment"
+        android:name="com.young.businessmine.ui.fragment.MemberCardFragment"
+        android:label="fragment_member_card_list"
+        tools:layout="@layout/fragment_member_card_list" >
+        <action
+            android:id="@+id/action_memberCardFragment_to_firstshowfragment"
             app:destination="@id/firstshowfragment" />
     </fragment>
 

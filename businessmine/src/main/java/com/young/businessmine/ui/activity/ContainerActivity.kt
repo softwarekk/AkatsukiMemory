@@ -13,7 +13,14 @@ import com.young.businessmine.base.BusinessMineBaseActivity
 import com.young.businessmine.databinding.ActivityMainBinding
 import com.young.businessmine.ui.viewmodel.ContainerShareVM
 import com.young.businessmine.ui.viewmodel.ContainerUIViewModel
+import com.young.businessmine.utils.AssetsUtils
 import com.young.commomlib.base.CommonBaseActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.lang.Exception
+
 /*
 * fragment的容器 可以充当组件通讯控制器
 * 控制下发
@@ -27,11 +34,23 @@ class ContainerActivity : BusinessMineBaseActivity<ActivityMainBinding, Containe
         navigationCT= findNavController(R.id.main_fragment_host)
         navigationCT?.addOnDestinationChangedListener(this)
         initObserVer()
+        GlobalScope.launch {
+            withContext(Dispatchers.IO){
+            }
+        }
+    }
+    private fun initAudioList() {//初始化本地压缩的音频数据
+        var audioNames = AssetsUtils().getfiles(this, "")
+        TLog.log("audio_data",audioNames?.size.toString())
+//        mContainerVM.audioLists.value=audioNames
     }
 
     private fun initObserVer() {
         mContainerVM.startHide.observe(this, Observer<Boolean> {
             getViewModel().graphChange.value=it
+        })
+        mContainerVM.audioLists.observe(this, Observer<Array<String?>> {
+            getViewModel().audioLists.value=it
         })
     }
 
@@ -45,9 +64,6 @@ class ContainerActivity : BusinessMineBaseActivity<ActivityMainBinding, Containe
         destination: NavDestination,
         arguments: Bundle?
     ) {
-//        if(destination.label?.equals("FirstShowFragment")!!){
-//            navigationCT?.popBackStack(destination.id,false)
-//        }
     }
     var clickTime:Long?=null
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {

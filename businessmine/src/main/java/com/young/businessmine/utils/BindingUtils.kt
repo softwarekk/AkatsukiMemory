@@ -1,6 +1,7 @@
 package com.young.businessmine.utils
 
 import android.view.View
+import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.databinding.BindingAdapter
 import com.young.baselib.CustomProjectLiveData
 import com.young.baselib.utils.TLog
@@ -31,6 +32,28 @@ import com.young.supportlib.floating.FloatingActionMenu
         fun floatingShow(view: FloatingActionMenu, isShow:Boolean) {
             TLog.log("BindingAdapter", "visible$isShow")
             if(isShow)view.open(true) else view.close(true)
+        }
+
+        @JvmStatic
+        @BindingAdapter(value = ["startTextAni"], requireAll = false)
+        fun startAni(mTarget: View, time:Int) {
+            TLog.log("BindingAdapter", "visible$time")
+            mTarget.animate()
+                .translationX(500f)
+                .setInterpolator(AccelerateDecelerateInterpolator())
+                .setDuration(time.toLong())
+                .setStartDelay(0);
+        }
+
+        @JvmStatic
+        @BindingAdapter(value = ["startEndTitleAni"], requireAll = false)
+        fun startAni2(mTarget: View, time:Int) {
+            TLog.log("BindingAdapter", "visible$time")
+            mTarget.animate()
+                .alpha(0.5f)
+                .setInterpolator(AccelerateDecelerateInterpolator())
+                .setDuration(time.toLong())
+                .setStartDelay(0);
         }
     }
 }

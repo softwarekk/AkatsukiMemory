@@ -1,20 +1,15 @@
 package com.young.businessmine.ui.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.young.businessmine.R
 import com.young.businessmine.databinding.ListShowLayoutBinding
-import com.young.businessmine.ui.viewmodel.FirstShowVM
 import com.young.businessmine.ui.viewmodel.LanucherVM
 import com.young.commomlib.base.CommonFragment
 
-class ListFragment : CommonFragment<ListShowLayoutBinding,LanucherVM>() {
+class ListArticleFragment : CommonFragment<ListShowLayoutBinding,LanucherVM>() {
 
     companion object {
-        fun newInstance() = ListFragment()
+        fun newInstance() = ListArticleFragment()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
