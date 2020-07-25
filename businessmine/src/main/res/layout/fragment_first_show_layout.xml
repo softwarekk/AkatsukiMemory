@@ -16,10 +16,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#000000">
-        <com.young.businessmine.ui.widget.StartShowView
+        <Syaring
+            android:id="@+id/test_drawable"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></com.young.businessmine.ui.widget.StartShowView>
-
+            android:layout_height="match_parent"></ImageView>
         <com.young.supportlib.floating.FloatingActionMenu
             android:id="@+id/flota"
             android:layout_width="wrap_content"

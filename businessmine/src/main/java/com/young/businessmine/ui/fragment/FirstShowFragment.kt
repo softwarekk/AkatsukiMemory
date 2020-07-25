@@ -1,7 +1,6 @@
 package com.young.businessmine.ui.fragment
 
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.View
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.young.baselib.utils.TLog
@@ -10,8 +9,7 @@ import com.young.businessmine.R
 import com.young.businessmine.base.BusinessMineBaseFragment
 import com.young.businessmine.databinding.FragmentFirstShowLayoutBinding
 import com.young.businessmine.ui.viewmodel.FirstShowVM
-import com.young.commomlib.Constants
-import com.young.commomlib.base.CommonFragment
+import com.young.supportlib.SyaringanDrawable
 
 class FirstShowFragment : BusinessMineBaseFragment<FragmentFirstShowLayoutBinding,FirstShowVM>(),View.OnClickListener {
 
@@ -24,6 +22,7 @@ class FirstShowFragment : BusinessMineBaseFragment<FragmentFirstShowLayoutBindin
         getBinding().testBtn.setOnClickListener(View.OnClickListener {
             nav()?.navigate(R.id.action_firstshowfragment_to_listFragment)
         })
+        getBinding().testDrawable.setImageDrawable(SyaringanDrawable())
     }
 
     override val bindingVariable: Int
