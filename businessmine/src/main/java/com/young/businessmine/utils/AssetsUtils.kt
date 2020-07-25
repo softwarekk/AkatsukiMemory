@@ -47,7 +47,6 @@ class AssetsUtils {
             // TODO Auto-generated catch block
             e.printStackTrace()
         } finally {
-            assetManager.close()
         }
         return files
     }

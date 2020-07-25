@@ -29,4 +29,12 @@ android {
 dependencies {
     api project(':commonlib')
     implementation files('libs\\pldroid-player-2.1.9.jar')
+    //玩一玩fresco
+    implementation 'com.facebook.fresco:fresco:2.2.0'
+    implementation 'com.facebook.fresco:animated-gif:2.2.0'
+    implementation 'com.facebook.fresco:animated-webp:2.2.0'
+    implementation 'com.facebook.fresco:webpsupport:2.2.0'
+    //再来个glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 }

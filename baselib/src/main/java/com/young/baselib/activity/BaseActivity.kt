@@ -31,13 +31,16 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseUIViewMode> :
     override fun onDestroy() {
         super.onDestroy()
     }
-    protected abstract fun getViewModel(): VM
+    fun getBinding() : V{
+        return viewDataBinding!!
+    }
+    protected abstract fun getUIViewModel(): VM
     abstract val bindingVariable: Int
     @get:LayoutRes
     abstract val layoutId: Int
     private fun byDataBindingAttach() {
         viewDataBinding = DataBindingUtil.setContentView(this, layoutId)
-        viewModel = if (viewModel == null) getViewModel() else viewModel
+        viewModel = if (viewModel == null) getUIViewModel() else viewModel
         if (bindingVariable > 0 && viewModel != null) {
             viewDataBinding?.setVariable(bindingVariable, viewModel)
         } else {

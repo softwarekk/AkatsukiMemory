@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="data"
+            type="com.young.businessmine.data.AudioItemUIBean" />
+        <variable
+            name="data_index"
+            type="Integer" />
+        <variable
+            name="click"
+            type="com.young.businessmine.utils.callback.IBindingItemClick" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_item_layout"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginTop="15dp">
+
+        <com.young.businessmine.ui.widget.MarqueeTextView
+            android:id="@+id/audio_name_tv"
+            android:text="@{data.audioName}"
+            android:scrollHorizontally="true"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:singleLine="true"
+            android:gravity="center|left"
+            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            audioItemSize="@{data.isPlaying()}"
+            android:clickable="true"
+            android:background="@drawable/audio_item_selector"
+            android:marqueeRepeatLimit="marquee_forever"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="@{()->click.onClick(data_index,data)}"/>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            lottieDo="@{data.isPlaying()}"
+            visible="@{data.isPlaying()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_fileName="audio_playing.json"
+            app:lottie_loop="true"></com.airbnb.lottie.LottieAnimationView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

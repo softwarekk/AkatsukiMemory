@@ -30,10 +30,10 @@ import com.young.commomlib.utils.ImageUtils
 class StartShowView :View {
 
     constructor(context: Context?) : super(context!!){
-        initData()
+        initData(null)
     }
     constructor(context: Context?, attrs: AttributeSet?) : super(context!!, attrs){
-        initData()
+        initData(attrs)
     }
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
         context!!,
@@ -61,11 +61,12 @@ class StartShowView :View {
     private lateinit var paintMember:Paint//成员图
     private lateinit var paintText:Paint//字体
     private lateinit var bgBitmap:Bitmap//背景图
+    private var bgReourceId:Int?=R.drawable.bg_juan_shou
     private var mDensity = 0f
     private val mRadius: Int = DisplayUtils.dp2px(100f)
     private val mCy: Int =  DisplayUtils.dp2px(550f)
     private var memberBitmaps=ArrayList<Bitmap>()
-    private var titleTextContent="卷首语"
+    private var titleTextContent:String?="卷首语"
     private var missionControl=DrawHandler()
 
     override fun onDraw(canvas: Canvas?) {
@@ -75,20 +76,30 @@ class StartShowView :View {
         drawText(canvas)
     }
 
-    private fun initData() {
+    private fun initData(attrs: AttributeSet?) {
+
+        val attr = context.obtainStyledAttributes(
+            attrs,
+            com.young.supportlib.R.styleable.StartTextView,
+            0,
+            0
+        )
+        titleTextContent=attr.getString(com.young.supportlib.R.styleable.StartShowtView_ss_title_content)
+        bgReourceId=attr.getResourceId(com.young.supportlib.R.styleable.StartShowtView_ss_bg,R.drawable.bg_juan_shou)
+
         var displayMetrics = DisplayMetrics()
         displayMetrics = context.resources.displayMetrics
         mDensity = displayMetrics.density
-        bgBitmap=BitmapFactory.decodeResource(this.context.resources, R.drawable.bg_juan_shou)
-        memberBitmaps.add(ImageUtils.getBitmap(R.drawable.member_tobi,DisplayUtils.dp2px(60f),DisplayUtils.dp2px(152f)))
-        memberBitmaps.add(ImageUtils.getBitmap(R.drawable.member_deidara,DisplayUtils.dp2px(60f),DisplayUtils.dp2px(152f)) )
-        memberBitmaps.add(ImageUtils.getBitmap(R.drawable.member_sasori,DisplayUtils.dp2px(60f),DisplayUtils.dp2px(152f)))
-        memberBitmaps.add(ImageUtils.getBitmap(R.drawable.member_hidan,DisplayUtils.dp2px(60f),DisplayUtils.dp2px(152f)))
-        memberBitmaps.add(ImageUtils.getBitmap(R.drawable.member_kakuzu,DisplayUtils.dp2px(60f),DisplayUtils.dp2px(152f)))
-        memberBitmaps.add(ImageUtils.getBitmap(R.drawable.member_kisame,DisplayUtils.dp2px(60f),DisplayUtils.dp2px(152f)))
-        memberBitmaps.add(ImageUtils.getBitmap(R.drawable.member_konan,DisplayUtils.dp2px(60f),DisplayUtils.dp2px(152f)))
-        memberBitmaps.add(ImageUtils.getBitmap(R.drawable.member_itach,DisplayUtils.dp2px(60f),DisplayUtils.dp2px(152f)))
-        memberBitmaps.add(ImageUtils.getBitmap(R.drawable.member_pain,DisplayUtils.dp2px(60f),DisplayUtils.dp2px(152f)))
+        bgBitmap=BitmapFactory.decodeResource(this.context.resources, bgReourceId!!)
+//        memberBitmaps.add(ImageUtils.getBitmap(R.drawable.member_tobi,DisplayUtils.dp2px(60f),DisplayUtils.dp2px(152f)))
+//        memberBitmaps.add(ImageUtils.getBitmap(R.drawable.member_deidara,DisplayUtils.dp2px(60f),DisplayUtils.dp2px(152f)) )
+//        memberBitmaps.add(ImageUtils.getBitmap(R.drawable.member_sasori,DisplayUtils.dp2px(60f),DisplayUtils.dp2px(152f)))
+//        memberBitmaps.add(ImageUtils.getBitmap(R.drawable.member_hidan,DisplayUtils.dp2px(60f),DisplayUtils.dp2px(152f)))
+//        memberBitmaps.add(ImageUtils.getBitmap(R.drawable.member_kakuzu,DisplayUtils.dp2px(60f),DisplayUtils.dp2px(152f)))
+//        memberBitmaps.add(ImageUtils.getBitmap(R.drawable.member_kisame,DisplayUtils.dp2px(60f),DisplayUtils.dp2px(152f)))
+//        memberBitmaps.add(ImageUtils.getBitmap(R.drawable.member_konan,DisplayUtils.dp2px(60f),DisplayUtils.dp2px(152f)))
+//        memberBitmaps.add(ImageUtils.getBitmap(R.drawable.member_itach,DisplayUtils.dp2px(60f),DisplayUtils.dp2px(152f)))
+//        memberBitmaps.add(ImageUtils.getBitmap(R.drawable.member_pain,DisplayUtils.dp2px(60f),DisplayUtils.dp2px(152f)))
         paintBg=Paint()
         paintText=Paint()
         paintMember= Paint()
@@ -111,8 +122,8 @@ class StartShowView :View {
         paintText.color = Color.parseColor("#6d5129") // 设置画笔颜色
         canvas.translate(100 * mDensity, 5 * mDensity)
         paintText.textAlign = Paint.Align.CENTER
-        val textWidth: Float = paintText.measureText(titleTextContent)
-        canvas.drawText(titleTextContent, 0, 3,textWidth, 70*mDensity, paintText)
+        val textWidth: Float = paintText.measureText(if(titleTextContent==null)"卷首语" else titleTextContent)
+        canvas.drawText(if(titleTextContent==null)"卷首语" else titleTextContent!!, 0, 3,textWidth, 70*mDensity, paintText)
     }
     inner class DrawHandler : Handler {
         constructor() : super()

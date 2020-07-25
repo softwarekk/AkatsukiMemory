@@ -33,7 +33,8 @@
             app:layout_constraintVertical_bias="0.75"
             app:text_bz_off="20dp"
             app:text_color="#5b451e"
-            app:text_content="那堪曲终人散,那堪流光过隙" />
+            lineAni="@{first_vm.lineOneAni}"
+            startTextView="@{first_vm.lineOneText}"/>
 
         <com.young.businessmine.ui.widget.StartTextView
             android:id="@+id/text_line_two"
@@ -44,7 +45,8 @@
             app:layout_constraintTop_toBottomOf="@+id/text_line_one"
             app:text_bz_off="20dp"
             app:text_color="#5b451e"
-            app:text_content="那堪回首一起流泪戳手指"></com.young.businessmine.ui.widget.StartTextView>
+            lineAni="@{first_vm.lineTwoAni}"
+            startTextView="@{first_vm.lineTwoText}"></com.young.businessmine.ui.widget.StartTextView>
 
         <com.young.businessmine.ui.widget.StartTextView
             android:id="@+id/text_line_three"
@@ -55,19 +57,28 @@
             app:layout_constraintTop_toBottomOf="@+id/text_line_two"
             app:text_bz_off="20dp"
             app:text_color="#5b451e"
-            app:text_content="那堪岁月静好莫失莫散莫离"></com.young.businessmine.ui.widget.StartTextView>
-
+            lineAni="@{first_vm.lineThreeAni}"
+            startTextView="@{first_vm.lineThreeText}"
+            ></com.young.businessmine.ui.widget.StartTextView>
         <com.young.businessmine.ui.widget.StartTextView
             android:id="@+id/text_line_four"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="15dp"
-            app:layout_constraintTop_toBottomOf="@+id/text_line_three"
             app:text_color="#6d5129"
-            android:visibility="gone"
-            app:text_content="----致年轻过的火迷们"
+            visible="@{first_vm.isShowSub()}"
+            app:text_size="24sp"
+            startSubAni="@{first_vm.subAniTime}"
+            startTextView="@{first_vm.subTitle}"
             app:text_shadowColor="@color/text_shadow_color"
-            app:text_size="24sp"></com.young.businessmine.ui.widget.StartTextView>
+            app:layout_constraintTop_toBottomOf="@+id/text_line_three"
+            ></com.young.businessmine.ui.widget.StartTextView>
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/begin_page"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            visible="@{first_vm.isShowBegin()}"
+            app:constraint_referenced_ids="text_line_three,text_line_four,text_line_three,text_line_one,text_line_two"></androidx.constraintlayout.widget.Group>
 
         <com.young.supportlib.floating.FloatingActionMenu
             android:id="@+id/flota"

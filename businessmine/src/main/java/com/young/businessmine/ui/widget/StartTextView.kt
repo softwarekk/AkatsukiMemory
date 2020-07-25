@@ -33,23 +33,22 @@ class StartTextView : View {
             0,
             0
         )
-        textContent=attr.getString(R.styleable.StartTextView_text_content)!!
-        textColor=attr.getColor(R.styleable.StartTextView_text_color,Color.parseColor("#6d5129"))!!
-        bzOffSet=attr.getDimension(R.styleable.StartTextView_text_bz_off,0f)!!
+        textContent=attr.getString(R.styleable.StartTextView_text_content)
+        textColor=attr.getColor(R.styleable.StartTextView_text_color,Color.parseColor("#6d5129"))
+        bzOffSet=attr.getDimension(R.styleable.StartTextView_text_bz_off,0f)
         textSize=attr.getDimension(R.styleable.StartTextView_text_size,80f)
-        textShadowColor=attr.getColor(R.styleable.StartTextView_text_color,Color.RED)!!
+        textShadowColor=attr.getColor(R.styleable.StartTextView_text_color,Color.RED)
         if(textShadowColor!=null){
             isShadowText=true
         }
         if(bzOffSet!=0f){
             isBZText=true
         }
-
     }
 
     private var mDensity = 0f
     private var textSize=80f//文字大小
-    private var textContent=""//文字内容
+    private var textContent:String?=""//文字内容
     private var bzOffSet=0f//文字流动偏移
     private var isBZText=false//文字使用贝塞尔绘制  bzOffSet!=0 使用贝塞尔
     private var isShadowText=false//是否绘制阴影 textShadowColor!=0 使用阴影
@@ -58,7 +57,9 @@ class StartTextView : View {
     private var textShadowColor:Int?=null//阴影字体颜色
     private var textColor:Int=Color.parseColor("#6d5129")//字体阴影颜色
 
-
+    fun setTextContent(content:String){
+        this.textContent=content
+    }
 
     fun initData(){
         var displayMetrics = DisplayMetrics()
@@ -89,7 +90,7 @@ class StartTextView : View {
                 width / 3f * 2 , height*1f,
                 width*1f-offWidth , height/3f
             )
-            canvas.drawTextOnPath(textContent, bSplinePath, 0f, 15f, paintText)
+            canvas.drawTextOnPath(textContent!!, bSplinePath, 0f, 15f, paintText)
         }else{
             paintText.setTextAlign(Paint.Align.RIGHT)
             val textWidth=paintText.measureText(textContent)
@@ -97,7 +98,7 @@ class StartTextView : View {
             val textHeight=text?.bottom?.minus(text?.top)
             TLog.log("draw_text","${width}___${height/2f}++${ height/2f+
                     (textHeight?.div(4f)!!)}")
-            canvas.drawText(textContent, 0, textContent.length, width*1f-30, height/2f+
+            canvas.drawText(textContent!!, 0, textContent?.length!!, width*1f-30, height/2f+
                     (textHeight/4f!!
             ), paintText) // 对文字有效
         }

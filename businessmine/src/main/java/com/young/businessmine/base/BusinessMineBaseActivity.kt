@@ -2,8 +2,11 @@ package com.young.businessmine.base
 
 import android.os.Bundle
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModelProvider
 import com.young.baselib.viewmodel.BaseUIViewMode
+import com.young.businessmine.R
 import com.young.businessmine.ui.viewmodel.ContainerShareVM
+import com.young.businessmine.utils.AssetsUtils
 import com.young.commomlib.base.CommonBaseActivity
 import com.young.commomlib.viewmodel.CommonShareVM
 
@@ -18,6 +21,6 @@ import com.young.commomlib.viewmodel.CommonShareVM
     lateinit  var mContainerVM: ContainerShareVM//app 分享数据模块
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mContainerVM= getAppViewModelProvider()!!.get(ContainerShareVM::class.java)
+        mContainerVM= getAppViewModelProvider()?.get(ContainerShareVM::class.java)!!
     }
 }

@@ -16,6 +16,6 @@ import com.young.commomlib.base.CommonFragment
     lateinit  var mContainerVM: ContainerShareVM//app 分享数据模块
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mContainerVM= getAppViewModelProvider()!!.get(ContainerShareVM::class.java)
+        mContainerVM= getAppViewModelProvider()?.get(ContainerShareVM::class.java)!!
     }
 }

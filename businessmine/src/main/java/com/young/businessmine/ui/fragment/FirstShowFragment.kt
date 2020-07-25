@@ -2,10 +2,12 @@ package com.young.businessmine.ui.fragment
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
-import android.view.animation.Animation
+import androidx.recyclerview.widget.PagerSnapHelper
 import com.young.baselib.utils.TLog
 import com.young.businessmine.BR
 import com.young.businessmine.R
@@ -18,84 +20,66 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-
+/*
+* 逻辑 ： 所有的UI 逻辑都由 UIVIewModel 控制
+*  FirstShowVM 控制xml UI 变动通知vm就可以
+* 动画执行流程 由协程控制时间进行控制
+* 单向UI触发UI逻辑由bindingUtils 处理 （动效执行、复杂显示隐藏）
+* 数据控制 由dataViewModel 通知UI viewModel 触发
+* 比如根据是否第一次安装进入 显示
+* 现在只做控制管理 data 和 UI 的转换
+* */
 class FirstShowFragment : BusinessMineBaseFragment<FragmentFirstShowLayoutBinding,FirstShowVM>(),View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        getBinding()?.loadingView?.setPageStatus(Constants.PAGE_LOADING)
-//        nav()?.navigate(R.id.action_firstshowfragment_to_listFragment)
-        TLog.log(LOG_TAG,"2222")
         getBinding().floatingclick=this
         getBinding().testBtn.setOnClickListener(View.OnClickListener {
             nav()?.navigate(R.id.action_firstshowfragment_to_listFragment)
         })
-        getBinding().run {
-            GlobalScope.launch {
-                withContext(Dispatchers.Main){
-                    TLog.log("ani_test","1111")
-                    textAniLogic(textLineOne)
-                }
-                withContext(Dispatchers.IO){
-                    TLog.log("ani_test","2222")
-                    Thread.sleep(500)
+        beginAniLogic()
+    }
+    //UI卷首总控 用时间控制动效 不使用回调
+    fun  beginAniLogic(){
+        getUIViewModel()?.run{
+            getBinding()?.run {
+                GlobalScope.launch {
                     withContext(Dispatchers.Main){
-                        textAniLogic(textLineTwo)
+                        isShowSub.value=false
+                        lineOneAni.value=3500
                     }
-                }
-                withContext(Dispatchers.IO){
-                    TLog.log("ani_test","3333")
-                    Thread.sleep(1000)
-                    withContext(Dispatchers.Main){
-                        textAniLogic(textLineThree)
+                    withContext(Dispatchers.IO){
+                        Thread.sleep(500)
+                        withContext(Dispatchers.Main){
+                            lineTwoAni.value=3500 //卷首行2
+                        }
                     }
-                    Thread.sleep(3500)
-                    withContext(Dispatchers.Main){
-                        textLineFour.visibility=View.VISIBLE
-                        textLineFour.animate()
-                            .scaleX(1.1f)
-                            .alpha(0.5f)
-                            .setInterpolator(AccelerateDecelerateInterpolator())
-                            .setDuration(1000)
-                            .setStartDelay(0)
-                            .setListener(object :
-                                Animator.AnimatorListener {
-                                override fun onAnimationRepeat(animation: Animator?) {
-                                }
-
-                                override fun onAnimationEnd(animation: Animator?) {
-                                }
-
-                                override fun onAnimationCancel(animation: Animator?) {
-                                }
-
-                                override fun onAnimationStart(animation: Animator?) {
-                                }
-                            })
-
-
+                    withContext(Dispatchers.IO){
+                        Thread.sleep(1000)
+                        withContext(Dispatchers.Main){
+                            lineThreeAni.value=3500//卷首行13
+                        }
+                        Thread.sleep(3500)
+                        withContext(Dispatchers.Main){
+                            isShowSub.value=true
+                            subAniTime.value=3000//卷首subtitle
+                        }
+                        Thread.sleep(4500)
+                        withContext(Dispatchers.Main){
+                            isShowBegin.value=false
+                        }
                     }
                 }
             }
         }
+    }
+    fun pageLogic(){
 
     }
-    fun textAniLogic(view:View){
-        view.animate()
-            .rotationX(360f)
-            .alpha(0.8f)
-            .translationX(ScreenUtils.getScreenWidth()*1f)
-            .setInterpolator(AccelerateDecelerateInterpolator())
-            .setDuration(3500)
-            .setStartDelay(0)
-//        var objectAnimator: ObjectAnimator =
-//            ObjectAnimator.ofFloat(view, "translationX", 0f, ScreenUtils.getScreenWidth()*1f)
-//        var animatorSet =  AnimatorSet()
-//        animatorSet.play(objectAnimator)
-//        animatorSet.interpolator= AccelerateDecelerateInterpolator()
-//        animatorSet.duration = 4000
-//        animatorSet.start()
-    }
+
+
+
+
     override fun onResume() {
         super.onResume()
     }
@@ -125,6 +109,11 @@ class FirstShowFragment : BusinessMineBaseFragment<FragmentFirstShowLayoutBindin
         }
         getUIViewModel().isMenuOpen.value=false
         TLog.log(LOG_TAG,"33333")
+    }
 
+    fun initSnap(){
+        var snapHelper: PagerSnapHelper = PagerSnapHelper()
+//        snapHelper.attachToRecyclerView(databinding?.chivoxContentRc)
+//        addOnScrollListener(RecyclerViewPageChangeListenerHelper(snapHelper, onPageChangeListener))
     }
 }

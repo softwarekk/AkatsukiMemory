@@ -7,6 +7,10 @@
         <attr name="text_content" format="string" />
         <attr name="text_bz_off" format="dimension" />
     </declare-styleable>
+    <declare-styleable name="StartShowtView">
+        <attr name="ss_title_content" format="string" />
+        <attr name="ss_bg" format="reference" />
+    </declare-styleable>
 
     <declare-styleable name="FloatingActionButtonView">
         <attr name="fab_colorNormal" format="color" />

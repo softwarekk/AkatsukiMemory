@@ -2,6 +2,7 @@ package com.young.commomlib.network;
 
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import com.young.commomlib.network.errorevent.AppDataErrorHandler;
 import com.young.commomlib.network.errorevent.HttpErrorHandler;
 import com.young.commomlib.network.interceptor.RequestInterceptor;
 import com.young.commomlib.network.interceptor.ResponseInterceptor;
@@ -19,8 +20,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by Allen on 2017/7/20.
- * 保留所有版权，未经允许请不要分享到互联网和其他人
  */
 public abstract class BaseRequestApi {
     protected Retrofit retrofit;
@@ -93,7 +92,7 @@ public abstract class BaseRequestApi {
             //onErrorResumeNext当发生错误的时候，由另外一个Observable来代替当前的Observable并继续发射数据
             return (io.reactivex.Observable<T>) upstream
                     .map(null)/*返回的数据统一错误处理*/
-//                    .map(new AppDataErrorHandler())/*返回的数据统一错误处理*/
+                    .map(new AppDataErrorHandler())/*返回的数据统一错误处理*/
                     .onErrorResumeNext(new HttpErrorHandler<T>());/*Http 错误处理**/
         }
     }

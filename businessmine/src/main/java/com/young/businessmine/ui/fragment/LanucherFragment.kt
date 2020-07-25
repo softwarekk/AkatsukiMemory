@@ -13,7 +13,6 @@ import com.young.businessmine.base.BusinessMineBaseFragment
 import com.young.businessmine.databinding.FragmentLancherLayoutBinding
 import com.young.businessmine.ui.viewmodel.LanucherVM
 import com.young.commomlib.base.CommonFragment
-import com.young.supportlib.AudioPlayer
 import com.young.supportlib.bloom.Bloom
 import com.young.supportlib.bloom.effector.BloomEffector
 import com.young.supportlib.bloom.listener.BloomListener

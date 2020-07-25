@@ -82,4 +82,22 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseUIViewMode?> :
     fun showToast(message:String){
         Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }
+    //权限运行 拥有权限复归逻辑 否则请求权限
+//    fun <T : CommonBaseActivity> T.permissionRun(policy: PermissionPolicy, mt: () -> Unit) {
+//        var a = arrayOf<String>()//具体权限
+//        when(policy){
+//            PermissionPolicy.P_STO->{
+//                a= DealWithPermissions.STORAGE
+//            }
+//            PermissionPolicy.P_MIC->{
+//                a= DealWithPermissions.MICROPHONE
+//            }
+//            PermissionPolicy.P_CAM->{
+//                a= DealWithPermissions.CAMERAS
+//            }
+//        }
+//        if (DealWithPermissions.getInstance(this).checkPermision(a)) mt()
+//        else DealWithPermissions.getInstance(this).requestSpecificPermissions(a)
+//    }
+
 }
