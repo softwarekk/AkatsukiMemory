@@ -10,13 +10,18 @@ import com.young.businessmine.utils.callback.IBindingItemClick
 import com.young.commomlib.base.BaseBindingAdapter
 
 class AudioItemAdapter :BaseBindingAdapter<AudioItemLayoutBinding, AudioItemUIBean> {
-    var listener:IBindingItemClick<AudioItemUIBean>
+    private var listener:IBindingItemClick<AudioItemUIBean>
+    private var playingIndex=0
     constructor(context: Context,clickCallback:IBindingItemClick<AudioItemUIBean>) : super(context, R.layout.audio_item_layout){
         listener=clickCallback
+    }
+    fun  setPlayingIndex(position:Int){
+        playingIndex=position
     }
     override fun bindView(viewHolder: CommonViewHolder, position: Int) {
         viewHolder?.bindView?.run {
             data=getDataList()[position]
+            isPlaying=playingIndex==position
             dataIndex=position
             click=listener
             audioNameTv.isFocusable=true

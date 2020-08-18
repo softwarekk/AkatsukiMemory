@@ -10,13 +10,17 @@ import com.young.supportlib.player.AudioListDataBean
  * Author Young
  * Date 2020-05-18
  */class ContainerShareVM : ViewModel{
+    //业务数据
     var startHide=CustomProjectLiveData<Boolean>()//启动页 只要是首页之前的逻辑处理结束就隐藏
     var audioLists=CustomProjectLiveData<List<AudioItemUIBean>>()//音频播放的音乐列表数据
     var audioPosition=CustomProjectLiveData<Int>()//当前选中的的audio列表位置
 
+    //记录新态数据
+    var oldAudioPosition=0
 
     constructor() : super(){
         startHide.value=false
-        audioPosition.postValue(0)
     }
+
+
 }

@@ -1,6 +1,7 @@
 package com.young.businessmine.ui.activity
 
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import androidx.lifecycle.Observer
@@ -38,6 +39,8 @@ class ContainerActivity : BusinessMineBaseActivity<ActivityMainBinding, Containe
 
     private var navigationCT:NavController?=null
     private var build:AppAudioManager?=null
+    private lateinit  var audioAdapter:AudioItemAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,6 +73,7 @@ class ContainerActivity : BusinessMineBaseActivity<ActivityMainBinding, Containe
     *   buildCallBack 是播放器给喂的奶
     * */
     private fun  initLeftAudio(){
+        TLog.log(LOG_TAG,"initleftaudio")
         GlobalScope.launch {
             withContext(Dispatchers.IO){
                 //把业务音频数据转化微AppAudioManager的管理数据
@@ -80,10 +84,8 @@ class ContainerActivity : BusinessMineBaseActivity<ActivityMainBinding, Containe
                 for ((i,e) in mContainerVM.audioLists.value?.withIndex()!!){
                     audioListDataBean=AudioListDataBean(e.audioName,"player_audio/${e.audioName}")
                     listDataBean.add(audioListDataBean)
-                    if(e.isPlaying) playingIndex=i
                 }
                 audioData= AudioListBean(0,listDataBean)
-                mContainerVM.audioLists.value
                 //初始化音频播放
                 if(build==null) {
                     build = AppAudioManager
@@ -91,15 +93,14 @@ class ContainerActivity : BusinessMineBaseActivity<ActivityMainBinding, Containe
                         .playMode(AppAudioManager.PlayMode.RANDOM)
                         .buildCallBack(object : IAudioObserver {
                             override fun onNextPlaying(position: Int) {
-                                initAudioBean(position)
+                                mContainerVM.audioPosition.postValue(position)
                             }
                         }).buildData(audioData)
-                        .play()
-                }else{
-                    build?.buildData(audioData)
-                        ?.playWithIndex(playingIndex)
+                    lifecycle.addObserver(build!!)
                 }
-                lifecycle.addObserver(build!!)
+                build?.buildData(audioData)
+                    ?.playWithIndex(playingIndex)
+
             }
         }
     }
@@ -116,11 +117,16 @@ class ContainerActivity : BusinessMineBaseActivity<ActivityMainBinding, Containe
                 var audioBeanList= arrayListOf<AudioItemUIBean>()
                 for ((i,e) in audioNames.withIndex()) {
                     var bean= AudioItemUIBean(
-                        e.toString(), i==position
+                        e.toString()
                     )
                     audioBeanList.add(bean)
                 }
-                mContainerVM.audioLists.postValue(audioBeanList)
+                val random=(0 until audioBeanList.size).random()
+                mContainerVM.audioLists.postValue(audioBeanList)//这个是播放器播放数据
+                mContainerVM.oldAudioPosition=random//上个播放position 用于重置播放转台
+                mContainerVM.audioPosition.postValue(random)//当前播放position
+                TLog.log(LOG_TAG,"post_audiolist")
+                initLeftAudio()
             }
         }
     }
@@ -133,6 +139,13 @@ class ContainerActivity : BusinessMineBaseActivity<ActivityMainBinding, Containe
             getUIViewModel().graphChange.postValue(it)
             getUIViewModel().isLeftShow.postValue(true)//在启动页消失显示audio left list
         })
+        mContainerVM.audioPosition.observe(this, Observer<Int> {
+            build?.playWithIndex(it)
+            audioAdapter.setPlayingIndex(it)
+            audioAdapter.notifyItemChanged(it)
+            audioAdapter.notifyItemChanged(mContainerVM.oldAudioPosition)
+            mContainerVM.oldAudioPosition=it
+        })
     }
     /*
     *双击推出的逻辑
@@ -141,10 +154,10 @@ class ContainerActivity : BusinessMineBaseActivity<ActivityMainBinding, Containe
     * */
     var clickTime:Long?=null
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        TLog.log(LOG_TAG,event?.action.toString())
-        when(event?.action){
-            KeyEvent.KEYCODE_UNKNOWN->{
-                TLog.log(LOG_TAG, "111$event"+navigationCT?.currentDestination?.label?.equals("FirstShowFragment"))
+        TLog.log(LOG_TAG+"KEYBACK",event?.action.toString()+keyCode)
+        when(keyCode){
+            KeyEvent.KEYCODE_BACK->{
+                TLog.log(LOG_TAG+"KEYBACK", "111$event"+navigationCT?.currentDestination?.label?.equals("FirstShowFragment"))
                 if(navigationCT?.currentDestination?.label?.equals("FirstShowFragment")!!) {
                     if(clickTime!=null) {
                         var curretnTime = System.currentTimeMillis()
@@ -176,7 +189,7 @@ class ContainerActivity : BusinessMineBaseActivity<ActivityMainBinding, Containe
     * 左侧audio player 初始化UI 和数据处理
     * */
     fun audioItemUI(){
-        val audioAdapter=AudioItemAdapter(this,this)
+        audioAdapter=AudioItemAdapter(this,this)
         getUIViewModel()?.run {
             getBinding()?.run {
                 leftRecycleview.adapter=audioAdapter
@@ -185,7 +198,6 @@ class ContainerActivity : BusinessMineBaseActivity<ActivityMainBinding, Containe
             mContainerVM?.audioLists.observe(this@ContainerActivity, Observer<List<AudioItemUIBean>> {
                 TLog.log("audio_data_change","123${it.size}+${it.get(0).audioName}")
                 audioAdapter.dataList=it //adapter 会diff做增量刷新
-                initLeftAudio()
             })
         }
     }
@@ -194,7 +206,7 @@ class ContainerActivity : BusinessMineBaseActivity<ActivityMainBinding, Containe
     * */
     override fun onClick(postion: Int, dataBean: AudioItemUIBean) {
         TLog.log("audio_click","$postion"+dataBean.audioName)
-        initAudioBean(postion)
+        mContainerVM.audioPosition.postValue(postion)
     }
 
     override fun getUIViewModel(): ContainerUIViewModel {

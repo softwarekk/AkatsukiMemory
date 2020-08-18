@@ -2,8 +2,11 @@ package com.young.businessmine.utils
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.LinearInterpolator
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.young.baselib.utils.TLog
@@ -64,6 +67,22 @@ class FirstPageBindingUtils {
             }else{
                 view.setPadding(DisplayUtils.dp2px(10f),0,DisplayUtils.dp2px(10f),0)
             }
+        }
+        @JvmStatic
+        @BindingAdapter(value = ["syaringanAni"], requireAll = false)
+        fun syaringanAni(view: View, milSec:Int) {
+            if(milSec==0){
+                return
+            }
+            var objectAnimator: ObjectAnimator =
+                ObjectAnimator.ofFloat(view, "rotation", 0f,360f)
+            objectAnimator.repeatCount=ValueAnimator.INFINITE
+            objectAnimator.repeatMode=ObjectAnimator.RESTART
+            var animatorSet =  AnimatorSet()
+            animatorSet.interpolator= LinearInterpolator()
+            animatorSet.play(objectAnimator)
+            animatorSet.duration = milSec.toLong()
+            animatorSet.start()
         }
     }
 }

@@ -102,14 +102,12 @@ object AppAudioManager :IAudioStatus,LifecycleObserver {
                 audioPlayer.play(audioData.playingBean().url)
             }
             PlayMode.RANDOM->{
-                audioData.position= makeRandom(audioData.audioDatas.size)
                 audioPlayer.play(audioData.playingBean().url)
             }
             PlayMode.ORDER->{
                 audioPlayer.play(audioData.playingBean().url)
             }
         }
-        managerStatus.onNextPlaying(audioData.position)
         return this
     }
     fun playWithIndex(index:Int){
@@ -124,11 +122,13 @@ object AppAudioManager :IAudioStatus,LifecycleObserver {
             PlayMode.SINGLE->{//播放位置不动
             }
             PlayMode.RANDOM->{//position播放前设置
+                audioData.position= makeRandom(audioData.audioDatas.size)
             }
             PlayMode.ORDER->{//顺序循环
                 audioData.position= if(audioData.isLast()) 0 else audioData.position+1
             }
         }
+        managerStatus.onNextPlaying(audioData.position)
         play()
     }
 

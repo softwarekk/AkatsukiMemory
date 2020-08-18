@@ -11,6 +11,9 @@
             name="data_index"
             type="Integer" />
         <variable
+            name="isPlaying"
+            type="Boolean" /><!--当前播放的条目-->
+        <variable
             name="click"
             type="com.young.businessmine.utils.callback.IBindingItemClick" />
     </data>
@@ -32,7 +35,7 @@
             android:gravity="center|left"
             android:layout_height="40dp"
             android:layout_width="match_parent"
-            audioItemSize="@{data.isPlaying()}"
+            audioItemSize="@{isPlaying}"
             android:clickable="true"
             android:background="@drawable/audio_item_selector"
             android:marqueeRepeatLimit="marquee_forever"
@@ -46,8 +49,8 @@
         <com.airbnb.lottie.LottieAnimationView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            lottieDo="@{data.isPlaying()}"
-            visible="@{data.isPlaying()}"
+            lottieDo="@{isPlaying}"
+            visible="@{isPlaying}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"

@@ -1,12 +1,7 @@
 package com.young.businessmine.ui.fragment
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.View
-import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.young.baselib.utils.TLog
 import com.young.businessmine.BR
@@ -14,11 +9,11 @@ import com.young.businessmine.R
 import com.young.businessmine.base.BusinessMineBaseFragment
 import com.young.businessmine.databinding.FragmentFirstShowLayoutBinding
 import com.young.businessmine.ui.viewmodel.FirstShowVM
-import com.young.commomlib.utils.ScreenUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import com.young.supportlib.SyaringanDrawable
 
 /*
 * 逻辑 ： 所有的UI 逻辑都由 UIVIewModel 控制
@@ -38,6 +33,7 @@ class FirstShowFragment : BusinessMineBaseFragment<FragmentFirstShowLayoutBindin
             nav()?.navigate(R.id.action_firstshowfragment_to_listFragment)
         })
         beginAniLogic()
+        pageLogic()
     }
     //UI卷首总控 用时间控制动效 不使用回调
     fun  beginAniLogic(){
@@ -74,11 +70,7 @@ class FirstShowFragment : BusinessMineBaseFragment<FragmentFirstShowLayoutBindin
         }
     }
     fun pageLogic(){
-
     }
-
-
-
 
     override fun onResume() {
         super.onResume()

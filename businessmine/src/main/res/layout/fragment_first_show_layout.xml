@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -25,6 +26,8 @@
 
         <com.young.businessmine.ui.widget.StartTextView
             android:id="@+id/text_line_one"
+            lineAni="@{first_vm.lineOneAni}"
+            startTextView="@{first_vm.lineOneText}"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             app:layout_constraintBottom_toTopOf="parent"
@@ -32,53 +35,61 @@
             app:layout_constraintTop_toBottomOf="@+id/startShowView"
             app:layout_constraintVertical_bias="0.75"
             app:text_bz_off="20dp"
-            app:text_color="#5b451e"
-            lineAni="@{first_vm.lineOneAni}"
-            startTextView="@{first_vm.lineOneText}"/>
+            app:text_color="#5b451e" />
 
         <com.young.businessmine.ui.widget.StartTextView
             android:id="@+id/text_line_two"
+            lineAni="@{first_vm.lineTwoAni}"
+            startTextView="@{first_vm.lineTwoText}"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_marginTop="10dp"
             app:layout_constraintRight_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_line_one"
             app:text_bz_off="20dp"
-            app:text_color="#5b451e"
-            lineAni="@{first_vm.lineTwoAni}"
-            startTextView="@{first_vm.lineTwoText}"></com.young.businessmine.ui.widget.StartTextView>
+            app:text_color="#5b451e"></com.young.businessmine.ui.widget.StartTextView>
 
         <com.young.businessmine.ui.widget.StartTextView
             android:id="@+id/text_line_three"
+            lineAni="@{first_vm.lineThreeAni}"
+            startTextView="@{first_vm.lineThreeText}"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_marginTop="10dp"
             app:layout_constraintRight_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_line_two"
             app:text_bz_off="20dp"
-            app:text_color="#5b451e"
-            lineAni="@{first_vm.lineThreeAni}"
-            startTextView="@{first_vm.lineThreeText}"
-            ></com.young.businessmine.ui.widget.StartTextView>
+            app:text_color="#5b451e"></com.young.businessmine.ui.widget.StartTextView>
+
         <com.young.businessmine.ui.widget.StartTextView
             android:id="@+id/text_line_four"
+            startSubAni="@{first_vm.subAniTime}"
+            startTextView="@{first_vm.subTitle}"
+            visible="@{first_vm.isShowSub()}"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="15dp"
-            app:text_color="#6d5129"
-            visible="@{first_vm.isShowSub()}"
-            app:text_size="24sp"
-            startSubAni="@{first_vm.subAniTime}"
-            startTextView="@{first_vm.subTitle}"
-            app:text_shadowColor="@color/text_shadow_color"
             app:layout_constraintTop_toBottomOf="@+id/text_line_three"
-            ></com.young.businessmine.ui.widget.StartTextView>
+            app:text_color="#6d5129"
+            app:text_shadowColor="@color/text_shadow_color"
+            app:text_size="24sp"></com.young.businessmine.ui.widget.StartTextView>
+
         <androidx.constraintlayout.widget.Group
             android:id="@+id/begin_page"
+            visible="@{first_vm.isShowBegin()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            visible="@{first_vm.isShowBegin()}"
             app:constraint_referenced_ids="text_line_three,text_line_four,text_line_three,text_line_one,text_line_two"></androidx.constraintlayout.widget.Group>
+
+        <com.young.supportlib.SyaringanDrawable
+            android:id="@+id/syaringgan_view"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></com.young.supportlib.SyaringanDrawable>
 
         <com.young.supportlib.floating.FloatingActionMenu
             android:id="@+id/flota"

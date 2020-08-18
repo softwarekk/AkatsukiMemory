@@ -10,10 +10,11 @@
             type="com.young.businessmine.ui.viewmodel.ContainerUIViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.young.businessmine.ui.activity.ContainerActivity">
+        tools:context="com.young.businessmine.ui.activity.ContainerActivity"
+        app:layoutDescription="@xml/activity_main_scene">
         <androidx.slidingpanelayout.widget.SlidingPaneLayout
             android:id="@+id/sliding_layout"
             android:layout_width="match_parent"
@@ -53,7 +54,6 @@
                 android:layout_height="match_parent"
                 app:defaultNavHost="true"
                 app:navGraph="@navigation/start_logic_navigation" />
-
         </FrameLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>
